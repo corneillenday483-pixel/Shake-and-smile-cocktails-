@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shake & Smile | Cocktail Events</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #000; color: #fff; font-family: sans-serif; }
+        .gold-text { color: #D4AF37; }
+        .gold-border { border-color: #D4AF37; }
+        .gold-gradient { background: linear-gradient(135deg, #D4AF37 0%, #F5E050 100%); }
+    </style>
+</head>
+<body>
+    <header class="flex flex-col items-center py-10 text-center">
+        <h1 class="text-3xl font-bold tracking-widest uppercase gold-text">SHAKE & SMILE</h1>
+        <p class="italic text-gray-400">Cocktail Events</p>
+    </header>
+
+    <section class="px-6 mb-10 space-y-4">
+        <a href="https://wa.me/TON_NUMERO" class="flex items-center justify-center py-4 rounded-xl gold-gradient text-black font-bold shadow-xl">
+            💬 WhatsApp (Réservations)
+        </a>
+        <a href="#" class="flex items-center justify-center py-4 rounded-xl border gold-border font-semibold">
+            📱 Instagram
+        </a>
+    </section>
+
+    <section class="px-6 mb-20 text-center">
+        <h2 class="text-xl font-bold mb-4 gold-text">Paiement Sécurisé</h2>
+        <a href="#" class="block w-full py-4 bg-white text-black font-bold rounded-full uppercase">
+            Effectuer un paiement
+        </a>
+    </section>
+</body>
+</html>
