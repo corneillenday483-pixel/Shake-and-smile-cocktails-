@@ -1,118 +1,129 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shake & Smile | Cocktail Events</title>
+    <title>Shake & Smile | Officiel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        body { background-color: #0f0f0f; color: #e5e5e5; font-family: 'Inter', -apple-system, sans-serif; }
+        body { 
+            background: radial-gradient(circle at top, #1a1a1a 0%, #000000 100%); 
+            color: #e5e5e5; 
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
         .gold-text { color: #D4AF37; }
-        .app-card { background-color: #1a1a1a; border-radius: 20px; border: 1px solid #2d2d2d; }
-        .btn-gold { background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%); color: #000; font-weight: 700; border-radius: 12px; }
-        .social-btn { background-color: #262626; border-radius: 12px; border: 1px solid #333; }
+        .app-card { 
+            background: rgba(26, 26, 26, 0.8); 
+            backdrop-filter: blur(10px);
+            border-radius: 24px; 
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+        .app-card:hover { transform: translateY(-5px); border-color: #D4AF37; }
+        .btn-gold { 
+            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%); 
+            color: #000; 
+            font-weight: 800; 
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        .pulse-gold { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
         .hidden { display: none; }
-        .fade-in { animation: fadeIn 0.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="max-w-md mx-auto px-6 py-10">
 
-    <header class="text-center mb-10">
+    <header class="text-center mb-10 animate__animated animate__fadeInDown">
         <div class="relative inline-block">
-            <img src="1001026236.png" alt="Shake & Smile Logo" class="w-32 h-32 rounded-full border-2 border-[#D4AF37] mx-auto mb-4 object-cover shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+            <img src="1767271665944 (3).png" alt="Shake & Smile" class="w-32 h-32 rounded-full border-2 border-[#D4AF37] mx-auto mb-4 object-cover shadow-2xl">
+            <div class="absolute inset-0 rounded-full border border-[#D4AF37] animate-ping opacity-20"></div>
         </div>
-        <h1 class="text-3xl font-bold tracking-tighter gold-text uppercase">SHAKE & SMILE</h1>
-        <p class="text-[10px] tracking-[0.4em] text-gray-500 uppercase mt-2">Cocktail Events & Mixologie</p>
+        <h1 class="text-3xl font-black tracking-tighter gold-text uppercase mt-2">SHAKE & SMILE</h1>
+        <div class="h-1 w-20 bg-[#D4AF37] mx-auto mt-2 rounded-full"></div>
     </header>
 
-    <div class="grid grid-cols-1 gap-3 mb-10">
-        <a href="https://wa.me/243978355121" class="btn-gold flex items-center justify-center py-4 text-sm uppercase tracking-widest shadow-lg">
-            <i class="fa-brands fa-whatsapp text-xl mr-2"></i> Réserver sur WhatsApp
+    <div class="grid grid-cols-1 gap-4 mb-10 animate__animated animate__fadeInUp animate__delay-1s">
+        <a href="https://wa.me/243978355121" class="btn-gold flex items-center justify-center py-4 text-sm uppercase tracking-widest pulse-gold">
+            <i class="fa-brands fa-whatsapp text-xl mr-2"></i> Réserver via WhatsApp
         </a>
         <div class="grid grid-cols-2 gap-3">
-            <a href="https://www.instagram.com/shake.andsmile?utm_source=qr&igsh=MThycWEzbjZ4MGx5NA==" class="social-btn flex items-center justify-center py-4 text-xs font-bold uppercase tracking-tighter">
-                <i class="fa-brands fa-instagram text-[#D4AF37] text-lg mr-2"></i> Instagram
+            <a href="https://www.instagram.com/shake.andsmile?utm_source=qr&igsh=MThycWEzbjZ4MGx5NA==" class="bg-zinc-900/50 rounded-xl flex items-center justify-center py-4 text-xs font-bold uppercase border border-zinc-800 hover:border-[#D4AF37]">
+                <i class="fa-brands fa-instagram text-[#D4AF37] mr-2"></i> Instagram
             </a>
-            <a href="https://tiktok.com/@shakeandsmilecocktail" class="social-btn flex items-center justify-center py-4 text-xs font-bold uppercase tracking-tighter">
-                <i class="fa-brands fa-tiktok text-[#D4AF37] text-lg mr-2"></i> TikTok
+            <a href="https://tiktok.com/@shakeandsmilecocktail" class="bg-zinc-900/50 rounded-xl flex items-center justify-center py-4 text-xs font-bold uppercase border border-zinc-800 hover:border-[#D4AF37]">
+                <i class="fa-brands fa-tiktok text-[#D4AF37] mr-2"></i> TikTok
             </a>
         </div>
     </div>
 
-    <div class="space-y-4 mb-10">
-        <h2 class="text-[10px] font-black text-gray-600 uppercase tracking-[0.2em] ml-1">Prestations</h2>
+    <div class="space-y-4 mb-10 animate__animated animate__fadeInUp animate__delay-2s">
         <div class="app-card p-5">
-            <div class="flex items-center mb-2">
-                <span class="text-xl mr-3">🍸</span>
-                <h3 class="font-bold text-white text-sm">Bar Événementiel Premium</h3>
-            </div>
-            <p class="text-xs text-gray-400 leading-relaxed">Service complet pour mariages, anniversaires et soirées de gala avec cocktails signature.</p>
-        </div>
-        <div class="app-card p-5">
-            <div class="flex items-center mb-2">
-                <span class="text-xl mr-3">🎓</span>
-                <h3 class="font-bold text-white text-sm">Ateliers Mixologie</h3>
-            </div>
-            <p class="text-xs text-gray-400 leading-relaxed">Apprenez les secrets de fabrication et l'équilibre des saveurs avec nos experts.</p>
+            <h3 class="font-bold text-[#D4AF37] text-sm mb-1 uppercase tracking-tighter">🍸 Bar Événementiel</h3>
+            <p class="text-[11px] text-gray-400">L'excellence de la mixologie pour vos moments d'exception.</p>
         </div>
     </div>
 
-    <div class="app-card p-6 border-[#D4AF37]/20 shadow-xl">
-        <h2 class="text-center text-sm font-bold mb-6 tracking-wide uppercase">Espace Paiement</h2>
+    <div class="app-card p-6 border-[#D4AF37]/30 shadow-2xl animate__animated animate__fadeInUp animate__delay-3s">
+        <h2 class="text-center text-[10px] font-black mb-6 tracking-[0.3em] uppercase text-gray-400">Espace Paiement</h2>
         
-        <button id="btn-pay-init" onclick="openPayment()" class="w-full py-4 rounded-xl border border-[#D4AF37] text-[#D4AF37] text-xs font-black uppercase tracking-widest">
-            Effectuer un paiement
+        <button id="main-pay-btn" onclick="openPaymentMenu()" class="w-full py-4 rounded-xl border border-[#D4AF37] text-[#D4AF37] text-xs font-black uppercase tracking-widest hover:bg-[#D4AF37] hover:text-black transition-all">
+            Effectuer un règlement
         </button>
 
-        <div id="payment-choice" class="hidden fade-in">
-            <p class="text-center text-[10px] text-gray-500 mb-6 uppercase tracking-widest">Sélectionnez votre opérateur</p>
-            <div class="flex justify-around items-center">
-                <div onclick="selectOperator('orange')" class="text-center cursor-pointer">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" class="w-14 h-14 rounded-xl shadow-lg mb-2 mx-auto">
-                    <p class="text-[9px] font-bold text-gray-400 uppercase">Orange</p>
+        <div id="payment-options" class="hidden animate__animated animate__fadeIn">
+            <div class="flex justify-around items-center gap-4">
+                <div onclick="showDetails('O')" class="text-center cursor-pointer hover:scale-110 transition">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" class="w-16 h-16 rounded-2xl shadow-lg mb-2">
+                    <p class="text-[9px] font-bold text-orange-500 uppercase">Orange</p>
                 </div>
-                <div onclick="selectOperator('airtel')" class="text-center cursor-pointer">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Airtel_logo_new.svg" class="w-14 h-14 bg-white p-2 rounded-xl shadow-lg mb-2 mx-auto">
-                    <p class="text-[9px] font-bold text-gray-400 uppercase">Airtel</p>
+                <div onclick="showDetails('A')" class="text-center cursor-pointer hover:scale-110 transition">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Airtel_logo_new.svg" class="w-16 h-16 bg-white p-2 rounded-2xl shadow-lg mb-2">
+                    <p class="text-[9px] font-bold text-red-600 uppercase">Airtel</p>
                 </div>
             </div>
-        </div>
-
-        <div id="account-details" class="hidden fade-in mt-8 p-5 bg-black/40 rounded-2xl border border-dashed border-zinc-700 text-center">
-            <p id="op-label" class="text-[9px] font-black mb-3 tracking-[0.2em]"></p>
-            <p id="op-number" class="text-xl font-mono font-bold gold-text tracking-wider mb-2"></p>
-            <p class="text-[10px] text-gray-400 mb-1 font-bold">NOM DU COMPTE :</p>
-            <p class="text-[11px] text-white uppercase mb-5">Corneille Nday</p>
-            <a href="https://wa.me/243978355121?text=Bonjour,%20je%20viens%20d'effectuer%20un%20paiement." class="inline-block text-[9px] font-bold text-blue-500 underline uppercase tracking-widest">Confirmer le transfert</a>
+            
+            <div id="payment-info" class="hidden mt-8 p-6 bg-black/60 rounded-3xl border border-[#D4AF37]/20 text-center animate__animated animate__zoomIn">
+                <p id="op-title" class="text-[10px] font-black mb-3 tracking-widest"></p>
+                <p id="op-number" class="text-2xl font-mono font-bold gold-text mb-2"></p>
+                <p class="text-[9px] text-gray-500 mb-1">PROPRIÉTAIRE :</p>
+                <p class="text-sm font-bold text-white uppercase mb-6">Corneille Nday</p>
+                <a href="https://wa.me/243978355121?text=Paiement_Effectué" class="text-[10px] font-bold text-blue-400 border-b border-blue-400 pb-1">ENVOYER LA PREUVE</a>
+            </div>
         </div>
     </div>
 
-    <footer class="mt-16 text-center">
-        <p class="text-[9px] text-gray-700 uppercase tracking-[0.5em]">© 2026 Shake & Smile</p>
+    <footer class="mt-16 text-center animate__animated animate__fadeIn">
+        <p class="text-[9px] text-gray-700 uppercase tracking-[0.4em]">© 2026 Shake & Smile • Kinshasa</p>
     </footer>
 
     <script>
-        function openPayment() {
-            document.getElementById('btn-pay-init').classList.add('hidden');
-            document.getElementById('payment-choice').classList.remove('hidden');
+        function openPaymentMenu() {
+            document.getElementById('main-pay-btn').classList.add('hidden');
+            document.getElementById('payment-options').classList.remove('hidden');
         }
-        function selectOperator(type) {
-            const details = document.getElementById('account-details');
-            const label = document.getElementById('op-label');
-            const number = document.getElementById('op-number');
-            details.classList.remove('hidden');
-            if(type === 'orange') {
-                label.innerText = "ORANGE MONEY RDC";
-                label.style.color = "#ff7900";
-                number.innerText = "+243 840 612 849";
+        function showDetails(op) {
+            const info = document.getElementById('payment-info');
+            const title = document.getElementById('op-title');
+            const num = document.getElementById('op-number');
+            info.classList.remove('hidden');
+            if(op === 'O') {
+                title.innerText = "ORANGE MONEY RDC";
+                title.style.color = "#ff7900";
+                num.innerText = "+243 840 612 849";
             } else {
-                label.innerText = "AIRTEL MONEY RDC";
-                label.style.color = "#e11d48";
-                number.innerText = "+243 978 355 121";
+                title.innerText = "AIRTEL MONEY RDC";
+                title.style.color = "#e11d48";
+                num.innerText = "+243 978 355 121";
             }
-            details.scrollIntoView({ behavior: 'smooth' });
+            info.scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
