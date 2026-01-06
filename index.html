@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -13,16 +13,16 @@
             color: #e5e5e5; 
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
+            margin: 0;
         }
         .gold-text { color: #D4AF37; }
         .app-card { 
             background: rgba(26, 26, 26, 0.8); 
             backdrop-filter: blur(10px);
             border-radius: 24px; 
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.15);
             transition: all 0.3s ease;
         }
-        .app-card:hover { transform: translateY(-5px); border-color: #D4AF37; }
         .btn-gold { 
             background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%); 
             color: #000; 
@@ -37,93 +37,86 @@
             100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
         .hidden { display: none; }
+        .logo-box { border: 2px solid #D4AF37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
     </style>
 </head>
 <body class="max-w-md mx-auto px-6 py-10">
 
     <header class="text-center mb-10 animate__animated animate__fadeInDown">
         <div class="relative inline-block">
-            <img src="1767271665944 (3).png" alt="Shake & Smile" class="w-32 h-32 rounded-full border-2 border-[#D4AF37] mx-auto mb-4 object-cover shadow-2xl">
+            <img src="1767271665944 (3).png" alt="Shake & Smile" class="w-32 h-32 rounded-full logo-box mx-auto mb-4 object-cover">
             <div class="absolute inset-0 rounded-full border border-[#D4AF37] animate-ping opacity-20"></div>
         </div>
         <h1 class="text-3xl font-black tracking-tighter gold-text uppercase mt-2">SHAKE & SMILE</h1>
-        <div class="h-1 w-20 bg-[#D4AF37] mx-auto mt-2 rounded-full"></div>
+        <div class="h-1 w-16 bg-[#D4AF37] mx-auto mt-2 rounded-full"></div>
     </header>
 
-    <div class="grid grid-cols-1 gap-4 mb-10 animate__animated animate__fadeInUp animate__delay-1s">
+    <div class="grid grid-cols-1 gap-4 mb-10 animate__animated animate__fadeInUp">
         <a href="https://wa.me/243978355121" class="btn-gold flex items-center justify-center py-4 text-sm uppercase tracking-widest pulse-gold">
-            <i class="fa-brands fa-whatsapp text-xl mr-2"></i> Réserver via WhatsApp
+            <i class="fa-brands fa-whatsapp text-xl mr-2"></i> Réserver sur WhatsApp
         </a>
         <div class="grid grid-cols-2 gap-3">
-            <a href="https://www.instagram.com/shake.andsmile?utm_source=qr&igsh=MThycWEzbjZ4MGx5NA==" class="bg-zinc-900/50 rounded-xl flex items-center justify-center py-4 text-xs font-bold uppercase border border-zinc-800 hover:border-[#D4AF37]">
+            <a href="https://www.instagram.com/shake.andsmile?utm_source=qr&igsh=MThycWEzbjZ4MGx5NA==" class="bg-zinc-900/50 rounded-xl flex items-center justify-center py-4 text-xs font-bold uppercase border border-zinc-800">
                 <i class="fa-brands fa-instagram text-[#D4AF37] mr-2"></i> Instagram
             </a>
-            <a href="https://tiktok.com/@shakeandsmilecocktail" class="bg-zinc-900/50 rounded-xl flex items-center justify-center py-4 text-xs font-bold uppercase border border-zinc-800 hover:border-[#D4AF37]">
+            <a href="https://tiktok.com/@shakeandsmilecocktail" class="bg-zinc-900/50 rounded-xl flex items-center justify-center py-4 text-xs font-bold uppercase border border-zinc-800">
                 <i class="fa-brands fa-tiktok text-[#D4AF37] mr-2"></i> TikTok
             </a>
         </div>
     </div>
 
-    <div class="space-y-4 mb-10 animate__animated animate__fadeInUp animate__delay-2s">
-        <div class="app-card p-5">
-            <h3 class="font-bold text-[#D4AF37] text-sm mb-1 uppercase tracking-tighter">🍸 Bar Événementiel</h3>
-            <p class="text-[11px] text-gray-400">L'excellence de la mixologie pour vos moments d'exception.</p>
-        </div>
-    </div>
-
-    <div class="app-card p-6 border-[#D4AF37]/30 shadow-2xl animate__animated animate__fadeInUp animate__delay-3s">
-        <h2 class="text-center text-[10px] font-black mb-6 tracking-[0.3em] uppercase text-gray-400">Espace Paiement</h2>
+    <div class="app-card p-6 shadow-2xl animate__animated animate__fadeInUp animate__delay-1s">
+        <h2 class="text-center text-[10px] font-black mb-6 tracking-[0.3em] uppercase text-gray-400">Règlement des prestations</h2>
         
-        <button id="main-pay-btn" onclick="openPaymentMenu()" class="w-full py-4 rounded-xl border border-[#D4AF37] text-[#D4AF37] text-xs font-black uppercase tracking-widest hover:bg-[#D4AF37] hover:text-black transition-all">
-            Effectuer un règlement
+        <button id="pay-start" onclick="this.classList.add('hidden'); document.getElementById('pay-grid').classList.remove('hidden');" class="w-full py-4 rounded-xl border border-[#D4AF37] text-[#D4AF37] text-[10px] font-black uppercase tracking-[0.2em]">
+            Effectuer un paiement
         </button>
 
-        <div id="payment-options" class="hidden animate__animated animate__fadeIn">
-            <div class="flex justify-around items-center gap-4">
-                <div onclick="showDetails('O')" class="text-center cursor-pointer hover:scale-110 transition">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" class="w-16 h-16 rounded-2xl shadow-lg mb-2">
-                    <p class="text-[9px] font-bold text-orange-500 uppercase">Orange</p>
+        <div id="pay-grid" class="hidden animate__animated animate__fadeIn">
+            <div class="flex justify-around items-center gap-6">
+                <div onclick="selectPay('O')" class="text-center cursor-pointer group">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" class="w-16 h-16 rounded-2xl shadow-lg mb-2 mx-auto group-active:scale-90 transition">
+                    <p class="text-[9px] font-bold text-orange-500">ORANGE</p>
                 </div>
-                <div onclick="showDetails('A')" class="text-center cursor-pointer hover:scale-110 transition">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Airtel_logo_new.svg" class="w-16 h-16 bg-white p-2 rounded-2xl shadow-lg mb-2">
-                    <p class="text-[9px] font-bold text-red-600 uppercase">Airtel</p>
+                <div onclick="selectPay('A')" class="text-center cursor-pointer group">
+                    <div class="w-16 h-16 bg-white rounded-2xl shadow-lg mb-2 mx-auto flex items-center justify-center p-2 group-active:scale-90 transition">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Airtel_logo_new.svg" class="w-full h-auto">
+                    </div>
+                    <p class="text-[9px] font-bold text-red-600 uppercase text-center">Airtel</p>
                 </div>
             </div>
-            
-            <div id="payment-info" class="hidden mt-8 p-6 bg-black/60 rounded-3xl border border-[#D4AF37]/20 text-center animate__animated animate__zoomIn">
-                <p id="op-title" class="text-[10px] font-black mb-3 tracking-widest"></p>
-                <p id="op-number" class="text-2xl font-mono font-bold gold-text mb-2"></p>
-                <p class="text-[9px] text-gray-500 mb-1">PROPRIÉTAIRE :</p>
-                <p class="text-sm font-bold text-white uppercase mb-6">Corneille Nday</p>
-                <a href="https://wa.me/243978355121?text=Paiement_Effectué" class="text-[10px] font-bold text-blue-400 border-b border-blue-400 pb-1">ENVOYER LA PREUVE</a>
+
+            <div id="pay-details" class="hidden mt-8 p-6 bg-black/60 rounded-3xl border border-[#D4AF37]/30 text-center animate__animated animate__zoomIn">
+                <p id="pay-name" class="text-[10px] font-black mb-3 tracking-widest uppercase"></p>
+                <p id="pay-num" class="text-xl font-mono font-bold gold-text mb-2 tracking-tighter"></p>
+                <div class="h-[1px] w-10 bg-zinc-800 mx-auto mb-3"></div>
+                <p class="text-[9px] text-gray-500 mb-1">TITULAIRE DU COMPTE</p>
+                <p class="text-xs font-bold text-white uppercase mb-6">Corneille Nday</p>
+                <a href="https://wa.me/243978355121?text=Confirmation_Paiement" class="text-[9px] font-bold text-blue-400 border-b border-blue-400 pb-1 uppercase tracking-widest">Confirmer l'envoi</a>
             </div>
         </div>
     </div>
 
-    <footer class="mt-16 text-center animate__animated animate__fadeIn">
-        <p class="text-[9px] text-gray-700 uppercase tracking-[0.4em]">© 2026 Shake & Smile • Kinshasa</p>
+    <footer class="mt-16 text-center opacity-50">
+        <p class="text-[8px] text-gray-500 uppercase tracking-[0.5em]">© 2026 Shake & Smile • Excellence</p>
     </footer>
 
     <script>
-        function openPaymentMenu() {
-            document.getElementById('main-pay-btn').classList.add('hidden');
-            document.getElementById('payment-options').classList.remove('hidden');
-        }
-        function showDetails(op) {
-            const info = document.getElementById('payment-info');
-            const title = document.getElementById('op-title');
-            const num = document.getElementById('op-number');
-            info.classList.remove('hidden');
+        function selectPay(op) {
+            const box = document.getElementById('pay-details');
+            const title = document.getElementById('pay-name');
+            const num = document.getElementById('pay-num');
+            box.classList.remove('hidden');
             if(op === 'O') {
-                title.innerText = "ORANGE MONEY RDC";
+                title.innerText = "Orange Money RDC";
                 title.style.color = "#ff7900";
-                num.innerText = "+243 840 612 849";
+                num.innerText = "084 061 284 9";
             } else {
-                title.innerText = "AIRTEL MONEY RDC";
+                title.innerText = "Airtel Money RDC";
                 title.style.color = "#e11d48";
-                num.innerText = "+243 978 355 121";
+                num.innerText = "097 835 512 1";
             }
-            info.scrollIntoView({ behavior: 'smooth' });
+            box.scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
