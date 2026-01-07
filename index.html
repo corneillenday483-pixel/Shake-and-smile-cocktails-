@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Inter:wght@300;400;600;900&display=swap');
-        :root { --gold: #D4AF37; --gold-glow: rgba(212, 175, 55, 0.4); }
+        :root { --gold: #D4AF37; }
 
         body { 
             background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), 
@@ -18,43 +18,38 @@
             color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden;
         }
 
-        /* BULLES DORÉES */
-        .particle { position: fixed; background: var(--gold); border-radius: 50%; pointer-events: none; opacity: 0.3; animation: float 15s infinite linear; }
+        /* EFFET BLUR SUR LE CONTENU PRINCIPAL */
+        body.modal-open #main-content { filter: blur(15px); transform: scale(0.98); transition: 0.5s ease; pointer-events: none; }
+
+        .particle { position: fixed; background: var(--gold); border-radius: 50%; pointer-events: none; opacity: 0.3; animation: float 15s infinite linear; z-index: 0; }
         @keyframes float { 0% { transform: translateY(100vh) scale(0); opacity: 0; } 50% { opacity: 0.5; } 100% { transform: translateY(-10vh) scale(1); opacity: 0; } }
 
         .gold-text { background: linear-gradient(to right, #D4AF37, #FBF5B7, #D4AF37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         .glass-item { 
-            background: rgba(255, 255, 255, 0.05) !important; backdrop-filter: blur(20px) !important; 
-            -webkit-backdrop-filter: blur(20px) !important;
-            border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 28px; transition: 0.4s ease;
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); 
+            border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 28px; transition: 0.3s ease;
         }
 
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; align-items: center; justify-content: center; padding: 20px; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center; padding: 20px; }
         .modal-content { 
-            background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(60px); 
-            border: 1px solid var(--gold); border-radius: 40px; 
-            width: 100%; max-width: 420px; padding: 30px; box-shadow: 0 0 80px rgba(0,0,0,1);
+            background: rgba(15, 15, 15, 0.98); border: 1px solid var(--gold); border-radius: 35px; 
+            width: 100%; max-width: 400px; padding: 25px; box-shadow: 0 0 50px rgba(0,0,0,0.8);
             max-height: 90vh; overflow-y: auto;
         }
 
-        .premium-input {
-            background: transparent !important; border: none !important;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3) !important;
-            color: white !important; padding: 12px 5px !important; margin-top: 8px !important; width: 100%; font-size: 13px;
+        .premium-input, .premium-select {
+            background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(212, 175, 55, 0.2) !important;
+            color: white !important; border-radius: 15px !important; padding: 12px !important; width: 100%; font-size: 13px; margin-top: 10px;
         }
 
         .contract-box {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.1);
-            border-radius: 20px; padding: 15px; font-size: 10px; color: #bbb;
-            height: 120px; overflow-y: scroll; margin-top: 20px; line-height: 1.6;
+            background: rgba(0,0,0,0.4); border-radius: 20px; padding: 15px; font-size: 10px; color: #bbb;
+            height: 100px; overflow-y: scroll; border: 1px solid rgba(212, 175, 55, 0.1); line-height: 1.6; margin-top: 15px;
         }
 
-        .btn-gold { 
-            background: linear-gradient(135deg, #D4AF37, #B8860B); color: #000; 
-            font-weight: 900; border-radius: 24px; text-transform: uppercase;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
+        .btn-gold { background: linear-gradient(135deg, #D4AF37, #B8860B); color: #000; font-weight: 900; border-radius: 20px; text-transform: uppercase; }
+        .pack-img { width: 100%; height: 110px; object-fit: cover; border-radius: 18px; }
     </style>
 </head>
 <body class="max-w-md mx-auto px-6 py-12">
@@ -64,56 +59,42 @@
     <div id="main-content">
         <header class="text-center mb-10 animate__animated animate__fadeIn">
             <h1 class="text-5xl font-black gold-text italic tracking-tighter mb-2" style="font-family: 'Playfair Display';">Shake & Smile</h1>
-            <p class="text-[9px] tracking-[0.5em] uppercase text-gray-500 font-bold mb-6">L'Art de la Mixologie</p>
+            <p class="text-[9px] tracking-[0.5em] uppercase text-gray-500 font-bold mb-8">Prestige & Mixologie</p>
             
-            <div class="flex justify-between items-center px-4 py-3 glass-item">
-                <div class="text-center"><p class="text-lg font-black leading-none">150+</p><p class="text-[7px] uppercase text-gray-400">Events</p></div>
-                <div class="w-px h-6 bg-gray-800"></div>
-                <div class="text-center"><p class="text-lg font-black leading-none">3k+</p><p class="text-[7px] uppercase text-gray-400">Cocktails</p></div>
-                <div class="w-px h-6 bg-gray-800"></div>
-                <div class="text-center"><p class="text-lg font-black leading-none">4.9</p><p class="text-[7px] uppercase text-gray-400">Avis</p></div>
+            <div class="flex justify-between items-center px-6 py-4 glass-item mb-8">
+                <div class="text-center"><p class="text-xl font-black gold-text">150+</p><p class="text-[7px] uppercase text-gray-400">Events</p></div>
+                <div class="text-center"><p class="text-xl font-black gold-text">3k+</p><p class="text-[7px] uppercase text-gray-400">Cocktails</p></div>
+                <div class="text-center"><p class="text-xl font-black gold-text">4.9</p><p class="text-[7px] uppercase text-gray-400">Avis</p></div>
             </div>
         </header>
 
-        <div class="space-y-5 mb-12">
-            <button onclick="toggleModal('devisModal', true)" class="w-full btn-gold py-6 text-sm font-black tracking-widest animate__animated animate__pulse animate__infinite animate__slow">
-                <i class="fa-solid fa-file-signature mr-2"></i> Demander un Devis
+        <div class="space-y-4 mb-10">
+            <button onclick="toggleModal('devisModal', true)" class="w-full btn-gold py-5 text-sm font-black tracking-widest shadow-2xl">
+                <i class="fa-solid fa-glass-cheers mr-2"></i> Demander un Devis
             </button>
-            <div class="grid grid-cols-2 gap-4">
-                <div onclick="toggleModal('discoveryModal', true)" class="glass-item py-6 text-center text-[10px] font-black uppercase tracking-widest cursor-pointer">
-                    <i class="fa-solid fa-images mb-2 block text-xl gold-text"></i> Galerie
-                </div>
-                <div onclick="toggleModal('payModal', true)" class="glass-item py-6 text-center text-[10px] font-black uppercase tracking-widest cursor-pointer">
-                    <i class="fa-solid fa-wallet mb-2 block text-xl gold-text"></i> Paiement
-                </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div onclick="toggleModal('discoveryModal', true)" class="glass-item py-5 text-center text-[10px] font-black uppercase cursor-pointer">Galerie</div>
+                <div onclick="toggleModal('payModal', true)" class="glass-item py-5 text-center text-[10px] font-black uppercase cursor-pointer text-yellow-500">Paiement</div>
             </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-2 mb-12 text-center">
-            <div class="p-2"><i class="fa-solid fa-wand-magic-sparkles gold-text text-xl mb-1"></i><p class="text-[7px] font-bold uppercase">Show</p></div>
-            <div class="p-2"><i class="fa-solid fa-glass-vine gold-text text-xl mb-1"></i><p class="text-[7px] font-bold uppercase">Goût</p></div>
-            <div class="p-2"><i class="fa-solid fa-handshake-angle gold-text text-xl mb-1"></i><p class="text-[7px] font-bold uppercase">Service</p></div>
-        </div>
-
-        <div class="space-y-4 mb-12">
-            <h2 class="text-center text-[10px] font-black text-gray-600 uppercase tracking-widest mb-6 italic">— Collections —</h2>
-            <div onclick="openPack('Platinum Prestige', 'Luxe absolu, fumée carbonique et service VIP.', ['https://raw.githubusercontent.com/corneillenday483-pixel/Shake-and-smile-cocktails-/main/1767271665944%20(3)%20(2).png', 'https://i.ibb.co/93nhSVqc/1767794466129.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer">
-                <span class="text-lg font-black gold-text italic">Platinum Prestige</span>
+        <div class="space-y-3 mb-12">
+            <h2 class="text-center text-[10px] font-black text-gray-600 uppercase tracking-widest mb-4 italic">— Nos Collections —</h2>
+            <div onclick="openPack('Platinum Prestige', 'Luxe absolu, fumée carbonique, garnitures or et service VIP.', ['https://raw.githubusercontent.com/corneillenday483-pixel/Shake-and-smile-cocktails-/main/1767271665944%20(3)%20(2).png', 'https://i.ibb.co/93nhSVqc/1767794466129.jpg'])" class="glass-item p-5 flex justify-between items-center cursor-pointer hover:border-gold">
+                <span class="text-md font-bold italic">Platinum Prestige</span>
                 <i class="fa-solid fa-crown gold-text"></i>
             </div>
-            <div onclick="openPack('Gold Experience', 'Équilibre parfait et créativité artistique.', ['https://i.ibb.co/ynD102Vf/1767794560467.jpg', 'https://i.ibb.co/kVmw2r0j/0619fc3a6e6d3404cb4434cc1019b112.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer">
-                <span class="text-lg font-black text-white italic">Gold Experience</span>
-                <i class="fa-solid fa-star opacity-40"></i>
+            <div onclick="openPack('Gold Experience', 'Équilibre parfait entre saveurs exotiques et créativité.', ['https://i.ibb.co/ynD102Vf/1767794560467.jpg', 'https://i.ibb.co/kVmw2r0j/0619fc3a6e6d3404cb4434cc1019b112.jpg'])" class="glass-item p-5 flex justify-between items-center cursor-pointer hover:border-gold">
+                <span class="text-md font-bold italic">Gold Experience</span>
+                <i class="fa-solid fa-star gold-text"></i>
             </div>
-            <div onclick="openPack('Fresh Smile', 'Mocktails aux fruits frais et infusions florales.', ['https://i.ibb.co/84RJ9w2Z/55b62810858f8abfb593fdaf3fa4aedd.jpg', 'https://i.ibb.co/Kjk0W2zG/e08dbd05085f4b972d0981d800bdb1af-1.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer">
-                <span class="text-lg font-black text-blue-300 italic">Fresh Smile</span>
-                <i class="fa-solid fa-leaf text-blue-300 opacity-50"></i>
+            <div onclick="openPack('Fresh Smile', 'Mocktails aux fruits frais, sirops maison et fraîcheur intense.', ['https://i.ibb.co/84RJ9w2Z/55b62810858f8abfb593fdaf3fa4aedd.jpg', 'https://i.ibb.co/Kjk0W2zG/e08dbd05085f4b972d0981d800bdb1af-1.jpg'])" class="glass-item p-5 flex justify-between items-center cursor-pointer hover:border-blue-300">
+                <span class="text-md font-bold italic text-blue-300">Fresh Smile</span>
+                <i class="fa-solid fa-leaf text-blue-300"></i>
             </div>
         </div>
 
-        <div onclick="toggleModal('reviewsModal', true)" class="glass-item py-4 text-center text-[10px] font-black uppercase tracking-widest mb-12 cursor-pointer">💬 Évaluez-nous & Avis</div>
-
-        <div class="flex justify-center gap-10 mb-8 text-3xl">
+        <div class="flex justify-center gap-10 mb-8 text-2xl">
             <a href="https://www.instagram.com/shake.andsmile" target="_blank" class="gold-text"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://www.tiktok.com/@shakeandsmilecocktail" target="_blank" class="text-white"><i class="fa-brands fa-tiktok"></i></a>
             <a href="https://wa.me/243978355121" target="_blank" class="text-green-500"><i class="fa-brands fa-whatsapp"></i></a>
@@ -121,63 +102,71 @@
     </div>
 
     <div id="devisModal" class="modal">
-        <div class="modal-content">
-            <h2 class="gold-text text-2xl font-black italic mb-4 uppercase">Privilège</h2>
+        <div class="modal-content animate__animated animate__fadeInUp">
+            <h2 class="gold-text text-xl font-black italic mb-6 text-center uppercase">Demande de Devis</h2>
             <div class="space-y-1">
-                <input type="text" id="f-nom" class="premium-input" placeholder="Nom complet">
-                <input type="text" id="f-event" class="premium-input" placeholder="Événement">
-                <input type="text" id="f-date" class="premium-input" placeholder="Date">
-                <input type="text" id="f-lieu" class="premium-input" placeholder="Lieu">
-                <input type="number" id="f-invites" class="premium-input" placeholder="Nombre d'invités">
-                <select id="f-pack" class="premium-input" onchange="checkAlcool()">
-                    <option value="" disabled selected>Collection</option>
-                    <option value="Platinum Prestige">Platinum Prestige</option>
-                    <option value="Gold Experience">Gold Experience</option>
-                    <option value="Fresh Smile">Fresh Smile</option>
-                </select>
-                <select id="f-alcool" class="premium-input">
-                    <option value="Sans Alcool">Sans Alcool</option>
-                    <option value="Avec Alcool">Avec Alcool</option>
-                    <option value="Les Deux">Les Deux</option>
-                </select>
-                <p id="alcool-warning" class="text-[9px] text-red-500 mt-2 hidden italic">⚠️ Fresh Smile est uniquement sans alcool.</p>
+                <input type="text" id="f-nom" class="premium-input" placeholder="Votre Nom Complet">
+                <input type="text" id="f-event" class="premium-input" placeholder="Type d'événement">
+                
+                <div class="grid grid-cols-2 gap-2 mt-2">
+                    <select id="f-pack" class="premium-select" onchange="verifyFreshSmile()">
+                        <option value="" disabled selected>Pack</option>
+                        <option value="Platinum Prestige">Platinum</option>
+                        <option value="Gold Experience">Gold</option>
+                        <option value="Fresh Smile">Fresh Smile</option>
+                    </select>
+                    <select id="f-alcool" class="premium-select">
+                        <option value="Sans Alcool">Sans Alcool</option>
+                        <option value="Avec Alcool">Avec Alcool</option>
+                        <option value="Les Deux">Les Deux</option>
+                    </select>
+                </div>
+                
+                <p id="alcohol-alert" class="text-[9px] text-red-500 mt-2 hidden italic text-center">
+                    ⚠️ La collection Fresh Smile est exclusivement sans alcool.
+                </p>
 
                 <div class="contract-box">
                     <strong>CONDITIONS DU CONTRAT :</strong><br>
-                    • <strong>Transport :</strong> À la charge du client (selon distance).<br>
-                    • <strong>Paiement :</strong> Intégralité avant la prestation.<br>
+                    • <strong>Logistique :</strong> Transport à charge du client (selon distance).<br>
+                    • <strong>Règlement :</strong> Paiement total avant la prestation.<br>
                     • <strong>Ingrédients :</strong> À la charge exclusive du client.<br>
-                    • <strong>Temps :</strong> Respect strict des horaires fixés.<br>
-                    • <strong>Respect :</strong> Courtoisie mutuelle client/équipe.
+                    • <strong>Ponctualité :</strong> Respect des horaires fixés par le client.<br>
+                    • <strong>Éthique :</strong> Respect mutuel client & équipe Shake & Smile.
                 </div>
-                <div class="flex items-center gap-2 mt-4">
-                    <input type="checkbox" id="f-check" class="accent-gold">
-                    <label for="f-check" class="text-[9px] text-gray-400">J'accepte les conditions du contrat.</label>
+
+                <div class="flex items-center gap-2 mt-4 px-2">
+                    <input type="checkbox" id="f-check" class="w-4 h-4 accent-yellow-600">
+                    <label for="f-check" class="text-[9px] text-gray-400 font-bold">J'accepte les conditions citées ci-dessus.</label>
                 </div>
+                
+                <button onclick="sendDevis()" class="w-full btn-gold py-5 mt-4 text-[11px] font-black">Valider sur WhatsApp</button>
             </div>
-            <button onclick="sendDevis()" class="w-full btn-gold py-5 mt-6 text-[10px] font-black">Envoyer ma demande</button>
-            <button onclick="toggleModal('devisModal', false)" class="w-full mt-4 text-gray-500 text-[10px] font-bold uppercase">Retour</button>
+            <button onclick="toggleModal('devisModal', false)" class="w-full mt-4 text-gray-600 text-[9px] font-bold">RETOUR</button>
         </div>
     </div>
 
-    <div id="payModal" class="modal"><div class="modal-content text-center"><h2 class="gold-text text-2xl font-black italic mb-6 uppercase">Règlement</h2><div class="space-y-4"><div class="p-5 glass-item"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" class="w-8 h-8 mx-auto mb-2"><p class="text-xl font-black gold-text">084 061 284 9</p></div><div class="p-5 glass-item"><div class="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center mx-auto mb-2 font-black text-xs text-white">A</div><p class="text-xl font-black gold-text">097 835 512 1</p></div></div><button onclick="toggleModal('payModal', false)" class="w-full btn-gold py-4 mt-8 text-[10px] font-black">Fermer</button></div></div>
+    <div id="packModal" class="modal">
+        <div class="modal-content animate__animated animate__zoomIn">
+            <div id="p-gallery" class="grid grid-cols-2 gap-2 mb-4"></div>
+            <h2 id="p-title" class="gold-text text-xl font-black italic mb-2"></h2>
+            <p id="p-desc" class="text-[11px] text-gray-400 leading-relaxed mb-6"></p>
+            <button onclick="toggleModal('packModal', false)" class="w-full btn-gold py-4 text-[10px] font-black italic">Choisir cette collection</button>
+        </div>
+    </div>
 
-    <div id="discoveryModal" class="modal"><div class="modal-content text-center"><h2 class="gold-text text-2xl font-black italic mb-8 uppercase">Galerie</h2><div class="space-y-4"><a href="https://www.tiktok.com/@shakeandsmilecocktail" target="_blank" class="block w-full py-5 glass-item text-[10px] font-black uppercase"><i class="fa-brands fa-tiktok mr-2"></i> TikTok</a><a href="https://www.instagram.com/shake.andsmile" target="_blank" class="block w-full py-5 glass-item text-[10px] font-black uppercase"><i class="fa-brands fa-instagram mr-2"></i> Instagram</a></div><button onclick="toggleModal('discoveryModal', false)" class="mt-8 text-gray-500 text-[10px] font-bold uppercase">Retour</button></div></div>
-
-    <div id="reviewsModal" class="modal"><div class="modal-content"><h2 class="gold-text text-2xl font-black italic mb-6 uppercase">Avis</h2><div id="reviews-list" class="space-y-4 mb-6 max-h-40 overflow-y-auto"><p class="text-[10px] italic text-gray-400 border-l border-gold pl-2">"Un service d'exception !" - Julie</p></div><input type="text" id="r-name" class="premium-input w-full bg-transparent p-2 text-xs" placeholder="Nom"><textarea id="r-text" class="premium-input w-full bg-transparent p-2 text-xs" placeholder="Message"></textarea><button onclick="addReview()" class="w-full btn-gold py-4 mt-6 text-[10px] font-black">Publier</button></div></div>
-
-    <div id="packModal" class="modal"><div class="modal-content"><div id="p-gallery" class="grid grid-cols-2 gap-3 mb-6"></div><h2 id="p-title" class="gold-text text-xl font-black italic mb-2 uppercase"></h2><p id="p-desc" class="text-[11px] text-gray-400 mb-8"></p><button onclick="toggleModal('packModal', false)" class="w-full btn-gold py-4 text-[10px] font-black">Retour</button></div></div>
+    <div id="payModal" class="modal"><div class="modal-content text-center"><h2 class="gold-text text-xl font-black italic mb-6">Paiement</h2><div class="space-y-3"><div class="p-4 glass-item"><p class="text-[10px] text-gray-500 mb-1">Orange Money</p><p class="font-bold gold-text">084 061 284 9</p></div><div class="p-4 glass-item"><p class="text-[10px] text-gray-500 mb-1">Airtel Money</p><p class="font-bold gold-text">097 835 512 1</p></div></div><button onclick="toggleModal('payModal', false)" class="w-full mt-6 text-gray-500 text-[10px]">RETOUR</button></div></div>
+    <div id="discoveryModal" class="modal"><div class="modal-content text-center"><h2 class="gold-text text-xl font-black italic mb-6 uppercase">Galerie</h2><div class="grid grid-cols-1 gap-3"><a href="https://www.tiktok.com/@shakeandsmilecocktail" class="glass-item py-5 text-[10px] font-bold">DÉCOUVRIR SUR TIKTOK</a><a href="https://www.instagram.com/shake.andsmile" class="glass-item py-5 text-[10px] font-bold">VOIR SUR INSTAGRAM</a></div><button onclick="toggleModal('discoveryModal', false)" class="mt-6 text-gray-500 text-[10px]">RETOUR</button></div></div>
 
     <script>
+        // Particules Dorées
         const container = document.getElementById('particles-container');
-        for (let i = 0; i < 20; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            const size = Math.random() * 4 + 2 + 'px';
+        for (let i = 0; i < 15; i++) {
+            const p = document.createElement('div'); p.className = 'particle';
+            const size = Math.random() * 3 + 2 + 'px';
             p.style.width = size; p.style.height = size;
             p.style.left = Math.random() * 100 + 'vw';
-            p.style.animationDelay = Math.random() * 15 + 's';
-            p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            p.style.animationDelay = Math.random() * 10 + 's';
             container.appendChild(p);
         }
 
@@ -187,46 +176,44 @@
             else { m.style.display = 'none'; document.body.classList.remove('modal-open'); }
         }
 
-        function checkAlcool() {
+        // VÉRIFICATION FRESH SMILE / ALCOOL
+        function verifyFreshSmile() {
             const pack = document.getElementById('f-pack').value;
-            const warning = document.getElementById('alcool-warning');
-            const select = document.getElementById('f-alcool');
-            if(pack === 'Fresh Smile') { 
-                warning.classList.remove('hidden'); select.value = 'Sans Alcool';
-            } else { warning.classList.add('hidden'); }
+            const selectAlcool = document.getElementById('f-alcool');
+            const alert = document.getElementById('alcohol-alert');
+
+            if(pack === 'Fresh Smile') {
+                selectAlcool.value = 'Sans Alcool';
+                for(let i=0; i<selectAlcool.options.length; i++) {
+                    if(selectAlcool.options[i].value !== 'Sans Alcool') selectAlcool.options[i].disabled = true;
+                }
+                alert.classList.remove('hidden');
+            } else {
+                for(let i=0; i<selectAlcool.options.length; i++) selectAlcool.options[i].disabled = false;
+                alert.classList.add('hidden');
+            }
         }
 
         function openPack(title, desc, imgs) {
             document.getElementById('p-title').innerText = title;
             document.getElementById('p-desc').innerText = desc;
             const gal = document.getElementById('p-gallery'); gal.innerHTML = '';
-            imgs.forEach(s => { gal.innerHTML += `<img src="${s}" class="w-full h-24 object-cover rounded-xl animate__animated animate__zoomIn">`; });
+            imgs.forEach(src => { gal.innerHTML += `<img src="${src}" class="pack-img border border-white/10 animate__animated animate__fadeIn">`; });
             toggleModal('packModal', true);
         }
 
-        function addReview() {
-            const n = document.getElementById('r-name').value;
-            const t = document.getElementById('r-text').value;
-            if(!n || !t) return;
-            const item = document.createElement('p');
-            item.className = "text-[10px] italic text-gray-300 border-l border-gold pl-2 mb-2 animate__animated animate__fadeIn";
-            item.innerHTML = `"${t}" - ${n}`;
-            document.getElementById('reviews-list').prepend(item);
-            document.getElementById('r-name').value = ''; document.getElementById('r-text').value = '';
-        }
-
         function sendDevis() {
-            if(!document.getElementById('f-check').checked) { alert("Veuillez accepter le contrat."); return; }
+            if(!document.getElementById('f-check').checked) { alert("Veuillez accepter les conditions du contrat."); return; }
             const n = document.getElementById('f-nom').value;
-            const e = document.getElementById('f-event').value;
             const p = document.getElementById('f-pack').value;
             const a = document.getElementById('f-alcool').value;
-            if(!n || !e || !p) { alert("Veuillez remplir les informations."); return; }
-            const msg = `*DEVIS PRESTIGE*%0A👤 Nom: ${n}%0A🍸 Event: ${e}%0A✨ Pack: ${p}%0A🍷 Alcool: ${a}%0A✅ CONTRAT ACCEPTÉ.`;
+            if(!n || !p) { alert("Veuillez remplir votre nom et choisir un pack."); return; }
+
+            const msg = `*DEMANDE DE DEVIS SHAKE %26 SMILE*%0A👤 Client : ${n}%0A✨ Collection : ${p}%0A🍷 Service : ${a}%0A✅ Les conditions du contrat ont été lues et acceptées.`;
             window.open(`https://wa.me/243978355121?text=${msg}`, '_blank');
         }
 
-        window.onclick = function(e) { if(e.target.className.includes('modal')) toggleModal(e.target.id, false); }
+        window.onclick = (e) => { if(e.target.className.includes('modal')) toggleModal(e.target.id, false); }
     </script>
 </body>
 </html>
