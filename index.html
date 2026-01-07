@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shake & Smile | Perfection Finale</title>
+    <title>Shake & Smile | L'Apogée</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -12,56 +12,56 @@
         :root { --gold: #D4AF37; }
 
         body { 
-            background: linear-gradient(rgba(0,0,0,0.92), rgba(0,0,0,0.97)), 
+            background: linear-gradient(rgba(20,20,20,0.8), rgba(30,30,30,0.9)), 
                         url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=2000&auto=format&fit=crop'); 
             background-size: cover; background-position: center; background-attachment: fixed;
             color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden;
         }
 
-        body.modal-open #main-content { filter: blur(25px); transform: scale(0.97); transition: 0.6s ease; }
+        /* FLOU DYNAMIQUE DU CONTENU AU CLIC POPUP */
+        body.modal-open #main-content { filter: blur(25px); transform: scale(0.97); transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+
         .gold-text { background: linear-gradient(to right, #D4AF37, #FBF5B7, #D4AF37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
+        /* TOUCHES AVEC FLOU GRADIENT ET VERRE */
         .glass-item { 
-            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); 
-            border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 35px; transition: 0.4s ease;
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 35px; transition: 0.5s ease;
         }
 
         .glass-item:hover, .btn-gold:hover { 
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4); 
-            border-color: var(--gold); transform: translateY(-3px);
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.4); 
+            border-color: var(--gold); transform: translateY(-5px);
         }
 
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 9999; align-items: center; justify-content: center; padding: 15px; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; align-items: center; justify-content: center; padding: 20px; }
         .modal-content { 
-            background: #050505; border: 1px solid var(--gold); border-radius: 45px; 
-            width: 100%; max-width: 410px; padding: 25px; max-height: 92vh; overflow-y: auto;
+            background: rgba(15,15,15,0.98); backdrop-filter: blur(25px); border: 1px solid var(--gold); border-radius: 45px; 
+            width: 100%; max-width: 410px; padding: 30px; max-height: 90vh; overflow-y: auto;
+            animation: animate__animated animate__zoomIn animate__faster;
         }
 
         .premium-input {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(212, 175, 55, 0.2);
-            color: white; border-radius: 18px; padding: 14px; width: 100%; font-size: 13px; outline: none; margin-top: 8px;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(212, 175, 55, 0.3);
+            color: white; border-radius: 20px; padding: 16px; width: 100%; font-size: 13px; outline: none; margin-top: 10px;
         }
 
         .select-card {
-            border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 18px; padding: 14px;
+            border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; padding: 14px;
             text-align: center; cursor: pointer; transition: 0.3s; font-size: 10px; font-weight: 900;
-            background: rgba(255,255,255,0.02); letter-spacing: 1px;
+            background: rgba(255,255,255,0.05);
         }
-        .select-card.active { background: var(--gold); color: black; box-shadow: 0 0 15px var(--gold); border-color: white; }
-        .select-card.disabled { opacity: 0.1; cursor: not-allowed; pointer-events: none; filter: grayscale(1); }
-
-        .contract-box {
-            background: rgba(255,255,255,0.02); border-radius: 25px; padding: 15px; font-size: 10px; color: #888;
-            height: 100px; overflow-y: scroll; border: 1px solid rgba(212, 175, 55, 0.1); line-height: 1.6;
-        }
+        .select-card.active { background: var(--gold); color: black; box-shadow: 0 0 20px var(--gold); border-color: white; }
+        .select-card.disabled { opacity: 0.15; cursor: not-allowed; pointer-events: none; filter: grayscale(1); }
 
         .btn-gold { 
             background: linear-gradient(135deg, #D4AF37, #B8860B); color: #000; font-weight: 900; 
-            border-radius: 22px; text-transform: uppercase; transition: 0.4s;
+            border-radius: 25px; text-transform: uppercase; transition: 0.5s;
         }
         
         .particle { position: fixed; background: var(--gold); border-radius: 50%; pointer-events: none; opacity: 0.15; animation: float 20s infinite linear; z-index: 0; }
-        @keyframes float { 0% { transform: translateY(100vh); } 100% { transform: translateY(-10vh); } }
+        @keyframes float { 0% { transform: translateY(110vh); } 100% { transform: translateY(-10vh); } }
     </style>
 </head>
 <body class="max-w-md mx-auto px-6 py-12">
@@ -69,43 +69,43 @@
     <div id="particles-container"></div>
 
     <div id="main-content">
-        <header class="text-center mb-12 animate__animated animate__fadeIn">
+        <header class="text-center mb-12 animate__animated animate__fadeInDown">
             <h1 class="text-5xl font-black gold-text italic tracking-tighter mb-2" style="font-family: 'Playfair Display';">Shake & Smile</h1>
-            <p class="text-[9px] tracking-[0.5em] uppercase text-gray-500 font-bold mb-10 italic">L'Excellence Mixologie</p>
+            <p class="text-[9px] tracking-[0.5em] uppercase text-gray-400 font-bold mb-10 italic animate__animated animate__fadeIn animate__delay-1s">Prestige Mixologie</p>
             
-            <div class="grid grid-cols-3 gap-1 px-4 py-8 glass-item mb-10">
-                <div class="text-center border-r border-white/5"><p class="text-xl font-black gold-text">150+</p><p class="text-[7px] uppercase text-gray-400 font-bold">Events</p></div>
-                <div class="text-center border-r border-white/5"><p class="text-xl font-black gold-text">3k+</p><p class="text-[7px] uppercase text-gray-400 font-bold">Cocktails</p></div>
+            <div class="grid grid-cols-3 gap-1 px-4 py-8 glass-item mb-10 animate__animated animate__zoomIn animate__delay-1s">
+                <div class="text-center border-r border-white/10"><p class="text-xl font-black gold-text">150+</p><p class="text-[7px] uppercase text-gray-400 font-bold">Events</p></div>
+                <div class="text-center border-r border-white/10"><p class="text-xl font-black gold-text">3k+</p><p class="text-[7px] uppercase text-gray-400 font-bold">Cocktails</p></div>
                 <div class="text-center"><p class="text-xl font-black gold-text">4.9</p><p class="text-[7px] uppercase text-gray-400 font-bold">Avis</p></div>
             </div>
         </header>
 
-        <div class="space-y-4 mb-12">
-            <button onclick="toggleModal('devisModal', true)" class="w-full btn-gold py-6 text-sm font-black shadow-2xl tracking-widest italic">Réserver Prestation</button>
+        <div class="space-y-5 mb-12">
+            <button onclick="toggleModal('devisModal', true)" class="w-full btn-gold py-6 text-sm font-black shadow-2xl tracking-widest italic animate__animated animate__fadeInLeft animate__delay-1s">RESERVER PRESTATION</button>
             <div class="grid grid-cols-2 gap-4">
-                <div onclick="toggleModal('discoveryModal', true)" class="glass-item py-7 text-center text-[10px] font-black uppercase cursor-pointer italic">Galerie</div>
-                <div onclick="toggleModal('payModal', true)" class="glass-item py-7 text-center text-[10px] font-black uppercase cursor-pointer italic">Paiement</div>
+                <div onclick="toggleModal('discoveryModal', true)" class="glass-item py-7 text-center text-[10px] font-black uppercase cursor-pointer italic animate__animated animate__fadeInUp animate__delay-1s">Galerie</div>
+                <div onclick="toggleModal('payModal', true)" class="glass-item py-7 text-center text-[10px] font-black uppercase cursor-pointer italic animate__animated animate__fadeInUp animate__delay-1s">Paiement</div>
             </div>
-            <div onclick="toggleModal('reviewsModal', true)" class="glass-item py-5 text-center text-[10px] font-black uppercase cursor-pointer tracking-[0.3em]">⭐ Avis Clients</div>
+            <div onclick="toggleModal('reviewsModal', true)" class="glass-item py-5 text-center text-[10px] font-black uppercase cursor-pointer tracking-[0.3em] animate__animated animate__fadeInUp animate__delay-2s">⭐ Avis Clients</div>
         </div>
 
-        <div class="space-y-3 mb-16">
-            <h2 class="text-center text-[10px] font-black text-gray-600 uppercase tracking-widest mb-6 italic">— Collections —</h2>
-            <div onclick="openPack('Platinum Prestige', 'Luxe absolu, fumée carbonique et service VIP.', ['https://raw.githubusercontent.com/corneillenday483-pixel/Shake-and-smile-cocktails-/main/1767271665944%20(3)%20(2).png', 'https://i.ibb.co/93nhSVqc/1767794466129.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer">
-                <span class="text-md font-bold italic tracking-tight">Platinum Prestige</span>
+        <div class="space-y-4 mb-16">
+            <h2 class="text-center text-[10px] font-black text-gray-500 uppercase tracking-widest mb-6 italic animate__animated animate__fadeIn">— Collections —</h2>
+            <div onclick="openPack('Platinum Prestige', 'Luxe absolu, fumée carbonique et service VIP.', ['https://raw.githubusercontent.com/corneillenday483-pixel/Shake-and-smile-cocktails-/main/1767271665944%20(3)%20(2).png', 'https://i.ibb.co/93nhSVqc/1767794466129.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer animate__animated animate__fadeInRight">
+                <span class="text-md font-bold italic">Platinum Prestige</span>
                 <i class="fa-solid fa-crown gold-text text-xl"></i>
             </div>
-            <div onclick="openPack('Gold Experience', 'Équilibre parfait et créativité artistique.', ['https://i.ibb.co/ynD102Vf/1767794560467.jpg', 'https://i.ibb.co/kVmw2r0j/0619fc3a6e6d3404cb4434cc1019b112.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer">
-                <span class="text-md font-bold italic tracking-tight">Gold Experience</span>
+            <div onclick="openPack('Gold Experience', 'Équilibre parfait et créativité artistique.', ['https://i.ibb.co/ynD102Vf/1767794560467.jpg', 'https://i.ibb.co/kVmw2r0j/0619fc3a6e6d3404cb4434cc1019b112.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer animate__animated animate__fadeInLeft">
+                <span class="text-md font-bold italic">Gold Experience</span>
                 <i class="fa-solid fa-star gold-text text-xl"></i>
             </div>
-            <div onclick="openPack('Fresh Smile', 'Mocktails aux fruits frais et infusions florales.', ['https://i.ibb.co/84RJ9w2Z/55b62810858f8abfb593fdaf3fa4aedd.jpg', 'https://i.ibb.co/Kjk0W2zG/e08dbd05085f4b972d0981d800bdb1af-1.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer">
-                <span class="text-md font-bold italic text-blue-300 tracking-tight">Fresh Smile</span>
+            <div onclick="openPack('Fresh Smile', 'Mocktails aux fruits frais et infusions florales.', ['https://i.ibb.co/84RJ9w2Z/55b62810858f8abfb593fdaf3fa4aedd.jpg', 'https://i.ibb.co/Kjk0W2zG/e08dbd05085f4b972d0981d800bdb1af-1.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer animate__animated animate__fadeInRight">
+                <span class="text-md font-bold italic text-blue-300">Fresh Smile</span>
                 <i class="fa-solid fa-leaf text-blue-300 text-xl"></i>
             </div>
         </div>
 
-        <div class="flex justify-center gap-12 mb-10 text-4xl">
+        <div class="flex justify-center gap-12 mb-10 text-4xl animate__animated animate__bounceInUp animate__delay-2s">
             <a href="https://www.instagram.com/shake.andsmile" target="_blank" class="gold-text"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://www.tiktok.com/@shakeandsmilecocktail" target="_blank" class="text-white"><i class="fa-brands fa-tiktok"></i></a>
             <a href="https://wa.me/243978355121" target="_blank" class="text-green-500"><i class="fa-brands fa-whatsapp"></i></a>
@@ -113,8 +113,8 @@
     </div>
 
     <div id="devisModal" class="modal">
-        <div class="modal-content">
-            <h2 class="gold-text text-xl font-black italic mb-6 text-center uppercase">Devis Personnalisé</h2>
+        <div class="modal-content animate__animated animate__zoomIn">
+            <h2 class="gold-text text-xl font-black italic mb-6 text-center uppercase">Devis Premium</h2>
             <div class="space-y-1">
                 <input type="text" id="f-nom" class="premium-input" placeholder="Nom Complet">
                 <div class="grid grid-cols-2 gap-2">
@@ -122,87 +122,69 @@
                     <input type="text" id="f-heure" class="premium-input" placeholder="Heure">
                 </div>
                 <input type="text" id="f-lieu" class="premium-input" placeholder="Lieu">
-                <input type="text" id="f-type" class="premium-input" placeholder="Type d'événement (ex: Mariage)">
+                <input type="text" id="f-type" class="premium-input" placeholder="Type d'événement">
                 <input type="number" id="f-invites" class="premium-input" placeholder="Nombre d'invités">
-                
-                <p class="text-[9px] text-gray-500 mt-6 uppercase font-black text-center">Collection Souhaitée</p>
-                <div class="grid grid-cols-1 gap-2 mt-2">
+                <div class="grid grid-cols-1 gap-2 mt-4">
                     <div class="select-card" id="p-plat" onclick="setPack('Platinum Prestige')">PLATINUM PRESTIGE</div>
                     <div class="select-card" id="p-gold" onclick="setPack('Gold Experience')">GOLD EXPERIENCE</div>
                     <div class="select-card" id="p-fresh" onclick="setPack('Fresh Smile')">FRESH SMILE</div>
                 </div>
                 <input type="hidden" id="f-pack-val" value="">
-
-                <p class="text-[9px] text-gray-500 mt-6 uppercase font-black text-center">Type de Service</p>
-                <div class="grid grid-cols-3 gap-2 mt-2">
+                <div class="grid grid-cols-3 gap-2 mt-4">
                     <div class="select-card" id="a-soft" onclick="setAlcool('SANS ALCOOL')">SOFT</div>
                     <div class="select-card" id="a-alc" onclick="setAlcool('AVEC ALCOOL')">ALCOOL</div>
                     <div class="select-card" id="a-mix" onclick="setAlcool('MIXTE')">MIXTE</div>
                 </div>
                 <input type="hidden" id="f-alcool-val" value="SANS ALCOOL">
-
-                <div class="contract-box mt-6">
-                    <strong>RÈGLES DE PRESTATION :</strong><br>
-                    • Transport : À la charge du client.<br>
-                    • Paiement : 100% à la réservation.<br>
-                    • Ingrédients : Client fournisseur.<br>
-                    • Éthique : Courtoisie et respect obligatoires.
-                </div>
-
-                <div class="flex items-center gap-3 mt-5 px-2">
-                    <input type="checkbox" id="f-check" class="accent-gold w-4 h-4">
-                    <label for="f-check" class="text-[9px] text-gray-400 font-bold uppercase">J'accepte les conditions</label>
-                </div>
-                
-                <button onclick="sendDevis()" class="w-full btn-gold py-5 mt-6 text-[11px] font-black uppercase tracking-widest">Réserver sur WhatsApp</button>
+                <button onclick="sendDevis()" class="w-full btn-gold py-5 mt-6 text-[11px] font-black uppercase tracking-widest shadow-lg">Finaliser sur WhatsApp</button>
             </div>
-            <button onclick="toggleModal('devisModal', false)" class="w-full mt-4 text-gray-700 text-[10px] font-bold">ANNULER</button>
+            <button onclick="toggleModal('devisModal', false)" class="w-full mt-4 text-gray-500 text-[10px] font-bold uppercase">Retour</button>
         </div>
     </div>
 
     <div id="payModal" class="modal">
-        <div class="modal-content text-center">
+        <div class="modal-content text-center animate__animated animate__zoomIn">
             <h2 class="gold-text text-xl font-black italic mb-4 uppercase">Paiement</h2>
-            <p class="text-[10px] text-gray-500 mb-8 font-black uppercase tracking-tighter">Veuillez copier le numéro pour effectuer votre dépôt.</p>
+            <p class="text-[10px] text-gray-400 mb-8 font-black uppercase tracking-tighter italic">Veuillez copier le numéro pour effectuer votre dépôt.</p>
             <div class="space-y-4">
-                <div class="p-6 glass-item">
+                <div class="p-6 glass-item animate__animated animate__fadeInUp">
                     <div class="flex items-center justify-between mb-2">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" class="w-8">
                         <p class="text-xl font-black gold-text italic">084 061 284 9</p>
                     </div>
                     <p class="text-[10px] text-white font-black uppercase text-right tracking-widest">Titulaire : CORNEILLE NDAY</p>
                 </div>
-                <div class="p-6 glass-item">
+                <div class="p-6 glass-item animate__animated animate__fadeInUp animate__delay-1s">
                     <div class="flex items-center justify-between mb-2">
-                        <div class="w-8 h-8 bg-red-600 rounded flex items-center justify-center font-black text-white">A</div>
+                        <div class="w-8 h-8 bg-red-600 rounded flex items-center justify-center font-black">A</div>
                         <p class="text-xl font-black gold-text italic">097 835 512 1</p>
                     </div>
                     <p class="text-[10px] text-white font-black uppercase text-right tracking-widest">Titulaire : CORNEILLE NDAY</p>
                 </div>
             </div>
-            <button onclick="toggleModal('payModal', false)" class="w-full mt-10 text-gray-500 text-[10px] font-bold uppercase">Retour</button>
+            <button onclick="toggleModal('payModal', false)" class="w-full mt-10 text-gray-500 text-[10px] font-bold uppercase tracking-widest">Fermer</button>
         </div>
     </div>
 
     <div id="reviewsModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content animate__animated animate__zoomIn">
             <h2 class="gold-text text-xl font-black italic mb-6 uppercase text-center">Avis Clients</h2>
             <div id="reviews-list" class="space-y-4 mb-6 max-h-48 overflow-y-auto pr-2">
-                <div class="p-4 bg-white/5 rounded-2xl border-l-4 border-gold text-[11px] italic">"Un service prestige qui a bluffé tous mes invités !" - Marc L.</div>
+                <div class="p-4 bg-white/5 rounded-2xl border-l-4 border-gold text-[11px] italic">"Le cocktail parfait n'existe pas... mais Shake & Smile l'a fait !" - Julie D.</div>
             </div>
             <input type="text" id="r-name" class="premium-input" placeholder="Votre Nom">
             <textarea id="r-text" class="premium-input mb-4" placeholder="Votre avis..."></textarea>
             <button onclick="addReview()" class="w-full btn-gold py-4 text-[11px] font-black italic">Publier</button>
-            <button onclick="toggleModal('reviewsModal', false)" class="w-full mt-4 text-gray-500 text-[10px] font-bold text-center uppercase">Fermer</button>
+            <button onclick="toggleModal('reviewsModal', false)" class="w-full mt-4 text-gray-500 text-[10px] font-bold text-center uppercase">Retour</button>
         </div>
     </div>
 
-    <div id="discoveryModal" class="modal"><div class="modal-content text-center"><h2 class="gold-text text-xl font-black italic mb-10 uppercase tracking-widest">Galerie</h2><div class="grid grid-cols-1 gap-4"><a href="https://www.tiktok.com/@shakeandsmilecocktail" class="glass-item py-6 flex items-center justify-center gap-6"><i class="fa-brands fa-tiktok text-3xl"></i><span class="text-[11px] font-black uppercase tracking-widest italic">TikTok Show</span></a><a href="https://www.instagram.com/shake.andsmile" class="glass-item py-6 flex items-center justify-center gap-6"><i class="fa-brands fa-instagram text-3xl gold-text"></i><span class="text-[11px] font-black uppercase tracking-widest italic">Instagram</span></a></div><button onclick="toggleModal('discoveryModal', false)" class="mt-10 text-gray-500 text-[10px] font-bold uppercase">Retour</button></div></div>
+    <div id="discoveryModal" class="modal"><div class="modal-content text-center animate__animated animate__zoomIn"><h2 class="gold-text text-xl font-black italic mb-10 uppercase tracking-widest">Galerie Royale</h2><div class="grid grid-cols-1 gap-4"><a href="https://www.tiktok.com/@shakeandsmilecocktail" class="glass-item py-6 flex items-center justify-center gap-6 animate__animated animate__fadeInUp"><i class="fa-brands fa-tiktok text-3xl"></i><span class="text-[11px] font-black uppercase italic">TikTok</span></a><a href="https://www.instagram.com/shake.andsmile" class="glass-item py-6 flex items-center justify-center gap-6 animate__animated animate__fadeInUp animate__delay-1s"><i class="fa-brands fa-instagram text-3xl gold-text"></i><span class="text-[11px] font-black uppercase italic">Instagram</span></a></div><button onclick="toggleModal('discoveryModal', false)" class="mt-10 text-gray-500 text-[10px] font-bold uppercase">Retour</button></div></div>
 
-    <div id="packModal" class="modal"><div class="modal-content"><div id="p-gallery" class="grid grid-cols-2 gap-2 mb-6"></div><h2 id="p-title" class="gold-text text-2xl font-black italic mb-2 uppercase"></h2><p id="p-desc" class="text-[12px] text-gray-400 leading-relaxed mb-10"></p><button onclick="toggleModal('packModal', false)" class="w-full btn-gold py-4 text-[10px] font-black italic">RETOUR</button></div></div>
+    <div id="packModal" class="modal"><div class="modal-content animate__animated animate__zoomIn"><div id="p-gallery" class="grid grid-cols-2 gap-2 mb-6"></div><h2 id="p-title" class="gold-text text-2xl font-black italic mb-2 uppercase"></h2><p id="p-desc" class="text-[12px] text-gray-400 leading-relaxed mb-10"></p><button onclick="toggleModal('packModal', false)" class="w-full btn-gold py-4 text-[10px] font-black italic">FERMER</button></div></div>
 
     <script>
-        // Effet Particules
+        // Effet Particules d'Or
         const container = document.getElementById('particles-container');
         for (let i = 0; i < 20; i++) {
             const p = document.createElement('div'); p.className = 'particle';
@@ -223,7 +205,6 @@
             document.querySelectorAll('#devisModal .select-card').forEach(el => { if(el.id.startsWith('p-')) el.classList.remove('active'); });
             const id = val === 'Platinum Prestige' ? 'p-plat' : val === 'Gold Experience' ? 'p-gold' : 'p-fresh';
             document.getElementById(id).classList.add('active');
-            
             const aAlc = document.getElementById('a-alc'); const aMix = document.getElementById('a-mix');
             if(val === 'Fresh Smile') { aAlc.classList.add('disabled'); aMix.classList.add('disabled'); setAlcool('SANS ALCOOL'); }
             else { aAlc.classList.remove('disabled'); aMix.classList.remove('disabled'); }
@@ -249,26 +230,19 @@
             const n = document.getElementById('r-name').value; const t = document.getElementById('r-text').value;
             if(!n || !t) return;
             const item = document.createElement('div');
-            item.className = "p-4 bg-white/5 rounded-2xl border-l-4 border-gold text-[11px] italic mb-3 animate__animated animate__fadeInUp";
+            item.className = "p-4 bg-white/5 rounded-2xl border-l-4 border-gold mb-3 animate__animated animate__fadeInUp";
             item.innerHTML = `"${t}" - ${n}`;
             document.getElementById('reviews-list').prepend(item);
             document.getElementById('r-name').value = ''; document.getElementById('r-text').value = '';
         }
 
         function sendDevis() {
-            if(!document.getElementById('f-check').checked) { alert("Veuillez accepter le contrat."); return; }
-            const n = document.getElementById('f-nom').value;
-            const d = document.getElementById('f-date').value;
-            const h = document.getElementById('f-heure').value;
-            const l = document.getElementById('f-lieu').value;
-            const t = document.getElementById('f-type').value;
-            const i = document.getElementById('f-invites').value;
-            const p = document.getElementById('f-pack-val').value;
-            const a = document.getElementById('f-alcool-val').value;
-            
+            const n = document.getElementById('f-nom').value; const d = document.getElementById('f-date').value;
+            const h = document.getElementById('f-heure').value; const l = document.getElementById('f-lieu').value;
+            const t = document.getElementById('f-type').value; const i = document.getElementById('f-invites').value;
+            const p = document.getElementById('f-pack-val').value; const a = document.getElementById('f-alcool-val').value;
             if(!n || !p) { alert("Nom et Pack requis."); return; }
-
-            const msg = `*RESERVATION SHAKE %26 SMILE*%0A👤 Client: ${n}%0A📅 Date: ${d} à ${h}%0A📍 Lieu: ${l}%0A🎉 Event: ${t}%0A👥 Invités: ${i}%0A✨ Pack: ${p}%0A🍷 Service: ${a}%0A✅ Contrat validé.`;
+            const msg = `*RESERVATION SHAKE %26 SMILE*%0A👤 Client: ${n}%0A📅 Date: ${d} à ${h}%0A📍 Lieu: ${l}%0A🎉 Event: ${t}%0A👥 Invités: ${i}%0A✨ Pack: ${p}%0A🍷 Service: ${a}`;
             window.open(`https://wa.me/243978355121?text=${msg}`, '_blank');
         }
 
