@@ -44,9 +44,8 @@
             to { transform: translate(30%, 30%) scale(1.3); opacity: 0.8; }
         }
 
-        /* LOGO SANS ARRIÈRE-PLAN (COLOR-DODGE) */
         .logo-transparent {
-            mix-blend-mode: screen; /* Supprime le fond noir du logo */
+            mix-blend-mode: screen;
             filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
         }
 
@@ -55,7 +54,6 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
         }
 
-        /* CARTES ET POPUPS GLASSMORPHISM */
         .app-card { 
             background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px);
             border-radius: 40px; border: 1px solid rgba(212, 175, 55, 0.2);
@@ -65,17 +63,23 @@
 
         .modal { 
             display: none; position: fixed; inset: 0; 
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(40px);
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(40px);
             z-index: 9999; align-items: center; justify-content: center; padding: 20px;
         }
         .modal-content {
-            background: linear-gradient(135deg, rgba(40,40,40,0.8), rgba(10,10,10,0.95));
+            background: linear-gradient(135deg, rgba(30,30,30,0.9), rgba(10,10,10,1));
             border: 1px solid var(--gold); border-radius: 40px; width: 100%; max-width: 400px; padding: 35px;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
         }
 
         .btn-gold { 
             background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%); 
             color: #000; font-weight: 900; border-radius: 20px; box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+        }
+        
+        input, select, textarea { 
+            background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(212,175,55,0.2) !important;
+            color: white !important; padding: 15px !important; border-radius: 15px !important; width: 100%; margin-top: 10px;
         }
     </style>
 </head>
@@ -112,21 +116,31 @@
     <div class="space-y-12">
         <div class="app-card overflow-hidden animate__animated animate__fadeInUp">
             <div class="h-48 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-1000 hover:scale-110">
+                <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover">
             </div>
             <div class="p-8">
                 <h3 class="text-2xl font-black gold-text italic">🥇 Platinum Prestige</h3>
-                <p class="text-xs text-gray-300 mt-4 leading-relaxed font-medium">Show magistral avec <b>fumée aromatique</b>. Cocktails Arc-en-ciel & spécialités. Décoration premium riche.</p>
+                <p class="text-xs text-gray-300 mt-4 leading-relaxed font-medium">Show magistral avec <b>fumée aromatique</b>. Cocktails Arc-en-ciel & créations maison. Décoration premium riche.</p>
             </div>
         </div>
 
         <div class="app-card overflow-hidden animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
             <div class="h-48 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-1000 hover:scale-110">
+                <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover">
             </div>
             <div class="p-8">
                 <h3 class="text-2xl font-black text-white italic">🥈 Gold Experience</h3>
                 <p class="text-xs text-gray-400 mt-4 leading-relaxed">Convivialité et esthétique. Cocktails classiques et Arc-en-ciel en verres incassables élégants.</p>
+            </div>
+        </div>
+
+        <div class="app-card overflow-hidden animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+            <div class="h-48 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover">
+            </div>
+            <div class="p-8">
+                <h3 class="text-2xl font-black text-blue-400 italic">🥉 Fresh Smile</h3>
+                <p class="text-xs text-gray-400 mt-4 leading-relaxed">L'essentiel pour un rafraîchissement immédiat. Recettes classiques (sans alcool) servies en gobelets jetables.</p>
             </div>
         </div>
     </div>
@@ -144,10 +158,6 @@
                 </div>
                 <p class="text-[10px] font-black text-red-500 uppercase">AIRTEL</p>
             </div>
-        </div>
-        <div id="pay-box" class="hidden mt-10 p-6 bg-white/5 rounded-[2rem] border border-white/10 text-center animate__animated animate__zoomIn">
-            <p id="pay-name" class="text-[9px] font-bold tracking-widest uppercase mb-2 text-gray-400"></p>
-            <p id="pay-num" class="text-2xl font-black text-white"></p>
         </div>
     </div>
 
@@ -174,6 +184,26 @@
     <footer class="mt-24 mb-12 text-center opacity-30">
         <p class="text-[9px] uppercase tracking-[0.6em] font-bold">© 2026 Shake & Smile • Excellence Mixologie</p>
     </footer>
+
+    <div id="payModal" class="modal">
+        <div class="modal-content animate__animated animate__zoomIn text-center">
+            <div class="flex justify-between items-center mb-8">
+                <h2 id="pay-name" class="gold-text text-xl font-black italic uppercase">Paiement</h2>
+                <button onclick="toggleModal('payModal', false)" class="text-white text-3xl">&times;</button>
+            </div>
+            <div class="space-y-6">
+                <div class="p-6 bg-white/5 rounded-3xl border border-white/10">
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-2">Numéro de compte</p>
+                    <p id="pay-num" class="text-2xl font-black text-white tracking-widest"></p>
+                </div>
+                <div class="p-4">
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest mb-1">Titulaire du compte</p>
+                    <p class="text-lg font-bold text-white uppercase gold-text">Corneille Nday</p>
+                </div>
+                <button onclick="toggleModal('payModal', false)" class="w-full btn-gold py-4 uppercase text-[11px]">J'ai noté</button>
+            </div>
+        </div>
+    </div>
 
     <div id="devisModal" class="modal">
         <div class="modal-content animate__animated animate__zoomIn">
@@ -209,8 +239,7 @@
         function toggleModal(id, show) { document.getElementById(id).style.display = show ? 'flex' : 'none'; }
 
         function selectPay(op) {
-            const box = document.getElementById('pay-box');
-            box.classList.remove('hidden');
+            toggleModal('payModal', true);
             if(op === 'O') {
                 document.getElementById('pay-name').innerText = "Orange Money";
                 document.getElementById('pay-num').innerText = "084 061 284 9";
@@ -223,7 +252,12 @@
         function sendDevis() {
             const nom = document.getElementById('f-nom').value;
             const event = document.getElementById('f-event').value;
-            const msg = `*DEVIS SHAKE-AND-SMILE-COCKTAILS*%0AClient: ${nom}%0AEvent: ${event}%0APack: ${document.getElementById('f-pack').value}`;
+            const pack = document.getElementById('f-pack').value;
+            const date = document.getElementById('f-date').value;
+            const addr = document.getElementById('f-addr').value;
+            const qty = document.getElementById('f-qty').value;
+
+            const msg = `*DEVIS SHAKE-AND-SMILE-COCKTAILS*%0AClient: ${nom}%0AEvent: ${event}%0ADate: ${date}%0ALieu: ${addr}%0APack: ${pack}%0AInvités: ${qty}`;
             window.open(`https://wa.me/243978355121?text=${msg}`, '_blank');
         }
 
