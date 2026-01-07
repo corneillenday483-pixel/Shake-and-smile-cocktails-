@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Inter:wght@300;600;900&display=swap');
-        :root { --gold: #D4AF37; --dark-bg: #0a0a0a; }
+        :root { --gold: #D4AF37; }
         
         body { 
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), 
@@ -19,26 +19,25 @@
             background-attachment: fixed;
             color: #fff; 
             font-family: 'Inter', sans-serif; 
-            overflow-x: hidden; 
         }
 
         .gold-text { background: linear-gradient(to right, #D4AF37, #FBF5B7, #D4AF37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glow-item { transition: all 0.4s ease; border: 1px solid rgba(212, 175, 55, 0.2); background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); border-radius: 20px; cursor: pointer; }
+        .glow-item { transition: all 0.3s ease; border: 1px solid rgba(212, 175, 55, 0.2); background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); border-radius: 20px; cursor: pointer; }
         .glow-item:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); transform: translateY(-3px); }
 
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); z-index: 9999; align-items: center; justify-content: center; padding: 20px; }
         .modal-content { background: #0f0f0f; border: 1px solid var(--gold); border-radius: 30px; width: 100%; max-width: 400px; padding: 25px; max-height: 90vh; overflow-y: auto; }
 
         .btn-gold { background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%); color: #000; font-weight: 900; border-radius: 15px; }
-        input, select { background: rgba(255,255,255,0.08) !important; border: 1px solid rgba(212, 175, 55, 0.3) !important; color: white !important; padding: 14px; border-radius: 12px; width: 100%; margin-top: 10px; font-size: 14px; }
+        input, select { background: rgba(255,255,255,0.08) !important; border: 1px solid rgba(212, 175, 55, 0.3) !important; color: white !important; padding: 14px; border-radius: 12px; width: 100%; margin-top: 10px; }
 
-        .social-btn { transition: all 0.3s ease; border: 1px solid rgba(212, 175, 55, 0.2); background: rgba(0,0,0,0.5); }
-        .social-btn:hover { transform: scale(1.15); border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+        .pack-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .pack-img { width: 100%; height: 120px; object-fit: cover; border-radius: 15px; border: 1px solid rgba(212,175,55,0.3); }
     </style>
 </head>
 <body class="max-w-md mx-auto px-6 py-10">
 
-    <header class="text-center mb-10 animate__animated animate__fadeIn">
+    <header class="text-center mb-10">
         <img src="1767271665944 (3).png" class="w-32 h-32 mx-auto mb-4 object-contain filter drop-shadow(0 0 15px rgba(212,175,55,0.6))">
         <h1 class="text-4xl font-black gold-text italic tracking-tighter" style="font-family: 'Playfair Display';">Shake & Smile</h1>
         <p class="text-[10px] tracking-[0.3em] uppercase text-gray-300 mt-2 font-bold italic">Mixologie Événementielle d'Elite</p>
@@ -56,45 +55,60 @@
 
     <div class="space-y-4 mb-12">
         <h2 class="text-center text-[10px] font-black text-gray-400 uppercase tracking-widest mb-6 italic">— Nos Formules Signature —</h2>
+        
         <div onclick="openPack('Platinum Prestige', 'Luxe ultime : Spectacle de fumée carbonique, cocktails Arc-en-ciel et service VIP.', ['https://i.ibb.co/VWVv31V3/1767794354722.jpg', 'https://i.ibb.co/93nhSVqc/1767794466129.jpg'])" class="glow-item p-6 flex justify-between items-center">
             <span class="text-lg font-black gold-text italic">Platinum Prestige</span>
             <i class="fa-solid fa-crown text-gold"></i>
         </div>
+
         <div onclick="openPack('Gold Experience', 'Équilibre parfait : Cocktails classiques et créations visuelles.', ['https://i.ibb.co/ynD102Vf/1767794560467.jpg', 'https://i.ibb.co/kVmw2r0j/0619fc3a6e6d3404cb4434cc1019b112.jpg'])" class="glow-item p-6 flex justify-between items-center">
             <span class="text-lg font-black text-white italic">Gold Experience</span>
             <i class="fa-solid fa-star text-white opacity-50"></i>
         </div>
+
+        <div onclick="openPack('Fresh Smile', 'Fraîcheur intense : Mocktails premium, cocktails aux fruits frais et décoration florale.', ['https://i.ibb.co/84RJ9w2Z/55b62810858f8abfb593fdaf3fa4aedd.jpg', 'https://i.ibb.co/Kjk0W2zG/e08dbd05085f4b972d0981d800bdb1af-1.jpg'])" class="glow-item p-6 flex justify-between items-center">
+            <span class="text-lg font-black text-blue-400 italic">Fresh Smile</span>
+            <i class="fa-solid fa-leaf text-blue-400"></i>
+        </div>
     </div>
 
-    <div class="mb-12 text-center animate__animated animate__fadeInUp">
-        <h2 class="text-[9px] font-black text-gray-500 uppercase mb-6 tracking-widest">Suivez l'Expérience en Vidéo</h2>
+    <div class="mb-12 text-center">
         <div class="flex justify-center gap-10">
-            <a href="https://www.instagram.com/shake.andsmile?utm_source=qr&igsh=MThycWEzbjZ4MGx5NA==" target="_blank" class="social-btn w-16 h-16 rounded-full flex items-center justify-center">
-                <i class="fa-brands fa-instagram text-3xl text-white"></i>
+            <a href="https://www.instagram.com/shake.andsmile?utm_source=qr&igsh=MThycWEzbjZ4MGx5NA==" target="_blank" class="w-14 h-14 rounded-full flex items-center justify-center bg-black/40 border border-white/10 hover:border-gold">
+                <i class="fa-brands fa-instagram text-2xl"></i>
             </a>
-            <a href="https://www.tiktok.com/@shakeandsmilecocktail" target="_blank" class="social-btn w-16 h-16 rounded-full flex items-center justify-center">
-                <i class="fa-brands fa-tiktok text-3xl text-white"></i>
+            <a href="https://www.tiktok.com/@shakeandsmilecocktail" target="_blank" class="w-14 h-14 rounded-full flex items-center justify-center bg-black/40 border border-white/10 hover:border-gold">
+                <i class="fa-brands fa-tiktok text-2xl"></i>
             </a>
         </div>
     </div>
 
-    <a href="https://wa.me/243978355121" class="glow-item p-5 flex items-center justify-center gap-3 mb-20 border-green-500/30">
+    <a href="https://wa.me/243978355121" class="glow-item p-5 flex items-center justify-center gap-3 mb-20">
         <i class="fa-brands fa-whatsapp text-green-500 text-2xl"></i>
         <span class="text-[11px] font-black uppercase tracking-widest">Discuter sur WhatsApp</span>
     </a>
 
+    <div id="packModal" class="modal">
+        <div class="modal-content">
+            <div id="p-gallery" class="pack-gallery"></div>
+            <h2 id="p-title" class="gold-text text-xl font-black italic mb-2"></h2>
+            <p id="p-desc" class="text-xs text-gray-400 leading-relaxed mb-6"></p>
+            <button onclick="toggleModal('packModal', false)" class="w-full btn-gold py-4 uppercase text-[10px] font-black">Fermer</button>
+        </div>
+    </div>
+
     <div id="devisModal" class="modal">
-        <div class="modal-content animate__animated animate__fadeInUp">
-            <h2 class="gold-text text-xl font-black italic mb-4 uppercase">Devis Personnalisé</h2>
+        <div class="modal-content">
+            <h2 class="gold-text text-xl font-black italic mb-4 uppercase">Devis</h2>
             <input type="text" id="f-nom" placeholder="Votre Nom">
             <input type="text" id="f-event" placeholder="Type d'événement">
-            <input type="text" id="f-date" placeholder="Date de l'événement">
-            <input type="text" id="f-lieu" placeholder="Lieu (Ville/Quartier)">
+            <input type="text" id="f-date" placeholder="Date">
+            <input type="text" id="f-lieu" placeholder="Lieu">
             <input type="number" id="f-invites" placeholder="Nombre d'invités">
             <select id="f-pack">
-                <option value="Platinum Prestige">Pack Platinum Prestige</option>
-                <option value="Gold Experience">Pack Gold Experience</option>
-                <option value="Fresh Smile">Pack Fresh Smile</option>
+                <option value="Platinum Prestige">Platinum Prestige</option>
+                <option value="Gold Experience">Gold Experience</option>
+                <option value="Fresh Smile">Fresh Smile</option>
             </select>
             <button onclick="sendDevisFull()" class="w-full btn-gold py-4 mt-6 uppercase text-[11px] font-black">Envoyer sur WhatsApp</button>
             <button onclick="toggleModal('devisModal', false)" class="w-full mt-4 text-gray-500 text-[10px] uppercase">Fermer</button>
@@ -103,36 +117,43 @@
 
     <div id="discoveryModal" class="modal">
         <div class="modal-content text-center">
-            <h2 class="gold-text text-xl font-black mb-4 uppercase italic">Galerie Prestige</h2>
-            <p class="text-[11px] text-gray-400 mb-6">Retrouvez nos plus belles réalisations et shows de fumée sur :</p>
-            <div class="space-y-3">
-                <a href="https://www.instagram.com/shake.andsmile?utm_source=qr&igsh=MThycWEzbjZ4MGx5NA==" target="_blank" class="block w-full py-3 border border-gold/40 rounded-xl text-xs font-bold uppercase"><i class="fa-brands fa-instagram mr-2"></i> Instagram officiel</a>
-                <a href="https://www.tiktok.com/@shakeandsmilecocktail" target="_blank" class="block w-full py-3 border border-gold/40 rounded-xl text-xs font-bold uppercase"><i class="fa-brands fa-tiktok mr-2"></i> TikTok officiel</a>
-            </div>
-            <button onclick="toggleModal('discoveryModal', false)" class="mt-8 text-gray-500 text-[10px] uppercase">Retour</button>
+            <h2 class="gold-text text-xl font-black mb-4 italic">Galerie</h2>
+            <p class="text-[11px] text-gray-400 mb-6">Suivez-nous sur nos réseaux pour voir nos shows.</p>
+            <button onclick="toggleModal('discoveryModal', false)" class="text-gold text-[10px] uppercase font-bold">Retour</button>
         </div>
     </div>
 
     <div id="reviewsModal" class="modal">
         <div class="modal-content">
-            <h2 class="gold-text text-xl font-black mb-6 uppercase text-center italic">Témoignages</h2>
-            <div class="space-y-4">
-                <div class="border-l-2 border-gold pl-3">
-                    <p class="text-[11px] italic text-gray-300">"Le show fumé du pack Platinum a été le clou de ma soirée. Impressionnant !"</p>
-                    <p class="text-[9px] font-bold text-gold mt-1">— Client Satisfait</p>
-                </div>
-                <div class="border-l-2 border-gold pl-3">
-                    <p class="text-[11px] italic text-gray-300">"Professionnalisme et saveurs au rendez-vous. Je recommande sans hésiter."</p>
-                    <p class="text-[9px] font-bold text-gold mt-1">— Marie-Laure</p>
-                </div>
-            </div>
-            <button onclick="toggleModal('reviewsModal', false)" class="w-full mt-8 text-gold text-[10px] font-black uppercase">Fermer</button>
+            <h2 class="gold-text text-xl font-black mb-4 text-center">Avis</h2>
+            <p class="text-[11px] italic text-gray-300">"Service incroyable !" - Marie K.</p>
+            <button onclick="toggleModal('reviewsModal', false)" class="w-full mt-6 text-gold text-[10px] uppercase">Fermer</button>
         </div>
     </div>
 
     <script>
-        function toggleModal(id, show) { document.getElementById(id).style.display = show ? 'flex' : 'none'; }
+        // Fonction pour ouvrir/fermer n'importe quel modal
+        function toggleModal(id, show) { 
+            const m = document.getElementById(id);
+            if(m) m.style.display = show ? 'flex' : 'none'; 
+        }
         
+        // Fonction pour afficher les détails d'un pack
+        function openPack(title, desc, imgs) {
+            document.getElementById('p-title').innerText = title;
+            document.getElementById('p-desc').innerText = desc;
+            const gallery = document.getElementById('p-gallery');
+            gallery.innerHTML = ''; 
+            imgs.forEach(src => {
+                const img = document.createElement('img'); 
+                img.src = src; 
+                img.className = "pack-img"; 
+                gallery.appendChild(img);
+            });
+            toggleModal('packModal', true);
+        }
+
+        // Envoi WhatsApp
         function sendDevisFull() {
             const nom = document.getElementById('f-nom').value;
             const event = document.getElementById('f-event').value;
@@ -141,23 +162,13 @@
             const invites = document.getElementById('f-invites').value;
             const pack = document.getElementById('f-pack').value;
 
-            if(!nom || !event || !date || !lieu || !invites) { 
-                alert("Merci de compléter tous les champs pour votre devis."); 
-                return; 
-            }
+            if(!nom || !event || !date) { alert("Champs obligatoires manquants"); return; }
 
-            const message = `*DEMANDE DE DEVIS SHAKE %26 SMILE*%0A` +
-                            `--------------------------------%0A` +
-                            `👤 *Nom :* ${nom}%0A` +
-                            `🍸 *Événement :* ${event}%0A` +
-                            `📅 *Date :* ${date}%0A` +
-                            `📍 *Lieu :* ${lieu}%0A` +
-                            `👥 *Invités :* ${invites}%0A` +
-                            `✨ *Formule :* ${pack}%0A` +
-                            `--------------------------------`;
+            const message = `*DEVIS SHAKE %26 SMILE*%0A👤 Nom: ${nom}%0A🍸 Event: ${event}%0A📅 Date: ${date}%0A📍 Lieu: ${lieu}%0A👥 Invités: ${invites}%0A✨ Pack: ${pack}`;
             window.open(`https://wa.me/243978355121?text=${message}`, '_blank');
         }
 
+        // Fermeture au clic extérieur
         window.onclick = function(e) { if(e.target.className === 'modal') e.target.style.display = 'none'; }
     </script>
 </body>
