@@ -9,151 +9,234 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Inter:wght@300;600;900&display=swap');
-        :root { --gold: #D4AF37; }
         
+        :root { --gold: #D4AF37; }
+
         body { 
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), 
                         url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=2000&auto=format&fit=crop'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: #fff; 
-            font-family: 'Inter', sans-serif; 
+            font-family: 'Inter', sans-serif;
+            transition: filter 0.3s ease;
         }
 
+        /* Effet Flou quand un modal est ouvert */
+        body.modal-open #main-content { filter: blur(8px); pointer-events: none; }
+
         .gold-text { background: linear-gradient(to right, #D4AF37, #FBF5B7, #D4AF37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glow-item { transition: all 0.3s ease; border: 1px solid rgba(212, 175, 55, 0.2); background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); border-radius: 20px; cursor: pointer; }
-        .glow-item:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); transform: translateY(-3px); }
+        
+        /* Boutons avec dégradé flou (Glassmorphism) */
+        .glass-item { 
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 22px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-item:hover { 
+            border-color: var(--gold); 
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            transform: translateY(-5px);
+        }
 
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); z-index: 9999; align-items: center; justify-content: center; padding: 20px; }
-        .modal-content { background: #0f0f0f; border: 1px solid var(--gold); border-radius: 30px; width: 100%; max-width: 400px; padding: 25px; max-height: 90vh; overflow-y: auto; }
+        /* Fenêtres Pop-up Premium */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            inset: 0; 
+            background: rgba(0,0,0,0.4); /* Fond léger car le flou est sur le body */
+            z-index: 9999; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 20px; 
+        }
+        .modal-content { 
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 35px; 
+            width: 100%; 
+            max-width: 420px; 
+            padding: 30px; 
+            max-height: 85vh; 
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
 
-        .btn-gold { background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%); color: #000; font-weight: 900; border-radius: 15px; }
-        input, select { background: rgba(255,255,255,0.08) !important; border: 1px solid rgba(212, 175, 55, 0.3) !important; color: white !important; padding: 14px; border-radius: 12px; width: 100%; margin-top: 10px; }
+        .btn-gold { 
+            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%); 
+            color: #000; font-weight: 900; border-radius: 18px; 
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
 
-        .pack-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .pack-img { width: 100%; height: 120px; object-fit: cover; border-radius: 15px; border: 1px solid rgba(212,175,55,0.3); }
+        input, select, textarea { 
+            background: rgba(255,255,255,0.05) !important; 
+            border: 1px solid rgba(255,255,255,0.1) !important; 
+            color: white !important; padding: 15px; border-radius: 15px; width: 100%; margin-top: 12px;
+            outline: none; transition: 0.3s;
+        }
+        input:focus { border-color: var(--gold) !important; background: rgba(255,255,255,0.1) !important; }
+
+        .pack-img { width: 100%; height: 140px; object-fit: cover; border-radius: 20px; }
     </style>
 </head>
 <body class="max-w-md mx-auto px-6 py-10">
 
-    <header class="text-center mb-10">
-        <img src="1767271665944 (3).png" class="w-32 h-32 mx-auto mb-4 object-contain filter drop-shadow(0 0 15px rgba(212,175,55,0.6))">
-        <h1 class="text-4xl font-black gold-text italic tracking-tighter" style="font-family: 'Playfair Display';">Shake & Smile</h1>
-        <p class="text-[10px] tracking-[0.3em] uppercase text-gray-300 mt-2 font-bold italic">Mixologie Événementielle d'Elite</p>
-    </header>
+    <div id="main-content">
+        <header class="text-center mb-10 animate__animated animate__fadeIn">
+            <img src="1767271665944 (3).png" class="w-32 h-32 mx-auto mb-4 object-contain filter drop-shadow(0 0 15px rgba(212,175,55,0.5))">
+            <h1 class="text-4xl font-black gold-text italic" style="font-family: 'Playfair Display';">Shake & Smile</h1>
+            <p class="text-[10px] tracking-[0.4em] uppercase text-gray-300 mt-2 font-bold italic">Mixologie d'Exception</p>
+        </header>
 
-    <div class="space-y-4 mb-10">
-        <button onclick="toggleModal('devisModal', true)" class="w-full btn-gold py-5 text-sm uppercase tracking-widest glow-item">
-            <i class="fa-solid fa-file-signature mr-2"></i> Obtenir un Devis
-        </button>
-        <div class="grid grid-cols-2 gap-4">
-            <div onclick="toggleModal('discoveryModal', true)" class="glow-item py-4 text-center text-[10px] font-black uppercase tracking-widest">✨ Galerie</div>
-            <div onclick="toggleModal('reviewsModal', true)" class="glow-item py-4 text-center text-[10px] font-black uppercase tracking-widest">💬 Avis Clients</div>
-        </div>
-    </div>
-
-    <div class="space-y-4 mb-12">
-        <h2 class="text-center text-[10px] font-black text-gray-400 uppercase tracking-widest mb-6 italic">— Nos Formules Signature —</h2>
-        
-        <div onclick="openPack('Platinum Prestige', 'Luxe ultime : Spectacle de fumée carbonique, cocktails Arc-en-ciel et service VIP.', ['https://i.ibb.co/VWVv31V3/1767794354722.jpg', 'https://i.ibb.co/93nhSVqc/1767794466129.jpg'])" class="glow-item p-6 flex justify-between items-center">
-            <span class="text-lg font-black gold-text italic">Platinum Prestige</span>
-            <i class="fa-solid fa-crown text-gold"></i>
+        <div class="space-y-5 mb-12">
+            <button onclick="toggleModal('devisModal', true)" class="w-full btn-gold py-6 text-sm uppercase tracking-widest glass-item" style="background: linear-gradient(135deg, #D4AF37, #B8860B); color: #000;">
+                <i class="fa-solid fa-paper-plane mr-2"></i> Demander un Devis
+            </button>
+            <div class="grid grid-cols-2 gap-4">
+                <div onclick="toggleModal('discoveryModal', true)" class="glass-item py-5 text-center text-[10px] font-black uppercase tracking-widest">✨ Galerie</div>
+                <div onclick="toggleModal('reviewsModal', true)" class="glass-item py-5 text-center text-[10px] font-black uppercase tracking-widest">💬 Avis</div>
+            </div>
         </div>
 
-        <div onclick="openPack('Gold Experience', 'Équilibre parfait : Cocktails classiques et créations visuelles.', ['https://i.ibb.co/ynD102Vf/1767794560467.jpg', 'https://i.ibb.co/kVmw2r0j/0619fc3a6e6d3404cb4434cc1019b112.jpg'])" class="glow-item p-6 flex justify-between items-center">
-            <span class="text-lg font-black text-white italic">Gold Experience</span>
-            <i class="fa-solid fa-star text-white opacity-50"></i>
+        <div class="space-y-4 mb-16">
+            <h2 class="text-center text-[10px] font-black text-gray-400 uppercase tracking-widest mb-6 italic">— Collections Privées —</h2>
+            
+            <div onclick="openPack('Platinum Prestige', 'Le summum de la mixologie : Shows de fumée spectaculaires, cocktails Arc-en-ciel et service premium.', ['https://i.ibb.co/VWVv31V3/1767794354722.jpg', 'https://i.ibb.co/93nhSVqc/1767794466129.jpg'])" class="glass-item p-6 flex justify-between items-center">
+                <div>
+                    <span class="text-lg font-black gold-text italic block">Platinum Prestige</span>
+                    <span class="text-[9px] text-gray-400 uppercase tracking-widest">Expérience Sensorielle</span>
+                </div>
+                <i class="fa-solid fa-crown text-gold text-xl"></i>
+            </div>
+
+            <div onclick="openPack('Gold Experience', 'Élégance et raffinement : Cocktails signatures et visuels artistiques.', ['https://i.ibb.co/ynD102Vf/1767794560467.jpg', 'https://i.ibb.co/kVmw2r0j/0619fc3a6e6d3404cb4434cc1019b112.jpg'])" class="glass-item p-6 flex justify-between items-center">
+                <div>
+                    <span class="text-lg font-black text-white italic block">Gold Experience</span>
+                    <span class="text-[9px] text-gray-400 uppercase tracking-widest">Équilibre Parfait</span>
+                </div>
+                <i class="fa-solid fa-star text-white opacity-40"></i>
+            </div>
+
+            <div onclick="openPack('Fresh Smile', 'Nature et Fraîcheur : Mocktails floraux et mélanges de fruits de saison.', ['https://i.ibb.co/84RJ9w2Z/55b62810858f8abfb593fdaf3fa4aedd.jpg', 'https://i.ibb.co/Kjk0W2zG/e08dbd05085f4b972d0981d800bdb1af-1.jpg'])" class="glass-item p-6 flex justify-between items-center">
+                <div>
+                    <span class="text-lg font-black text-blue-300 italic block">Fresh Smile</span>
+                    <span class="text-[9px] text-gray-400 uppercase tracking-widest">Pureté Vitamine</span>
+                </div>
+                <i class="fa-solid fa-leaf text-blue-300 opacity-60"></i>
+            </div>
         </div>
 
-        <div onclick="openPack('Fresh Smile', 'Fraîcheur intense : Mocktails premium, cocktails aux fruits frais et décoration florale.', ['https://i.ibb.co/84RJ9w2Z/55b62810858f8abfb593fdaf3fa4aedd.jpg', 'https://i.ibb.co/Kjk0W2zG/e08dbd05085f4b972d0981d800bdb1af-1.jpg'])" class="glow-item p-6 flex justify-between items-center">
-            <span class="text-lg font-black text-blue-400 italic">Fresh Smile</span>
-            <i class="fa-solid fa-leaf text-blue-400"></i>
-        </div>
-    </div>
-
-    <div class="mb-12 text-center">
-        <div class="flex justify-center gap-10">
-            <a href="https://www.instagram.com/shake.andsmile?utm_source=qr&igsh=MThycWEzbjZ4MGx5NA==" target="_blank" class="w-14 h-14 rounded-full flex items-center justify-center bg-black/40 border border-white/10 hover:border-gold">
-                <i class="fa-brands fa-instagram text-2xl"></i>
-            </a>
-            <a href="https://www.tiktok.com/@shakeandsmilecocktail" target="_blank" class="w-14 h-14 rounded-full flex items-center justify-center bg-black/40 border border-white/10 hover:border-gold">
-                <i class="fa-brands fa-tiktok text-2xl"></i>
-            </a>
-        </div>
-    </div>
-
-    <a href="https://wa.me/243978355121" class="glow-item p-5 flex items-center justify-center gap-3 mb-20">
-        <i class="fa-brands fa-whatsapp text-green-500 text-2xl"></i>
-        <span class="text-[11px] font-black uppercase tracking-widest">Discuter sur WhatsApp</span>
-    </a>
-
-    <div id="packModal" class="modal">
-        <div class="modal-content">
-            <div id="p-gallery" class="pack-gallery"></div>
-            <h2 id="p-title" class="gold-text text-xl font-black italic mb-2"></h2>
-            <p id="p-desc" class="text-xs text-gray-400 leading-relaxed mb-6"></p>
-            <button onclick="toggleModal('packModal', false)" class="w-full btn-gold py-4 uppercase text-[10px] font-black">Fermer</button>
+        <div class="flex justify-center gap-12 mb-16">
+            <a href="https://www.instagram.com/shake.andsmile?utm_source=qr&igsh=MThycWEzbjZ4MGx5NA==" target="_blank" class="text-3xl hover:text-gold transition-colors"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@shakeandsmilecocktail" target="_blank" class="text-3xl hover:text-gold transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/243978355121" target="_blank" class="text-3xl text-green-500"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
     </div>
 
     <div id="devisModal" class="modal">
-        <div class="modal-content">
-            <h2 class="gold-text text-xl font-black italic mb-4 uppercase">Devis</h2>
+        <div class="modal-content animate__animated animate__zoomIn">
+            <h2 class="gold-text text-2xl font-black italic mb-2">DEVIS PRIVÉ</h2>
+            <p class="text-[10px] text-gray-400 uppercase tracking-[0.2em] mb-4">Réservez l'excellence</p>
             <input type="text" id="f-nom" placeholder="Votre Nom">
-            <input type="text" id="f-event" placeholder="Type d'événement">
-            <input type="text" id="f-date" placeholder="Date">
-            <input type="text" id="f-lieu" placeholder="Lieu">
-            <input type="number" id="f-invites" placeholder="Nombre d'invités">
+            <input type="text" id="f-event" placeholder="Nature de l'événement">
+            <input type="text" id="f-date" placeholder="Date souhaitée">
+            <input type="text" id="f-lieu" placeholder="Lieu de réception">
+            <input type="number" id="f-invites" placeholder="Nombre de convives">
             <select id="f-pack">
-                <option value="Platinum Prestige">Platinum Prestige</option>
-                <option value="Gold Experience">Gold Experience</option>
-                <option value="Fresh Smile">Fresh Smile</option>
+                <option value="Platinum Prestige">Pack Platinum Prestige</option>
+                <option value="Gold Experience">Pack Gold Experience</option>
+                <option value="Fresh Smile">Pack Fresh Smile</option>
             </select>
-            <button onclick="sendDevisFull()" class="w-full btn-gold py-4 mt-6 uppercase text-[11px] font-black">Envoyer sur WhatsApp</button>
-            <button onclick="toggleModal('devisModal', false)" class="w-full mt-4 text-gray-500 text-[10px] uppercase">Fermer</button>
-        </div>
-    </div>
-
-    <div id="discoveryModal" class="modal">
-        <div class="modal-content text-center">
-            <h2 class="gold-text text-xl font-black mb-4 italic">Galerie</h2>
-            <p class="text-[11px] text-gray-400 mb-6">Suivez-nous sur nos réseaux pour voir nos shows.</p>
-            <button onclick="toggleModal('discoveryModal', false)" class="text-gold text-[10px] uppercase font-bold">Retour</button>
+            <button onclick="sendDevisFull()" class="w-full btn-gold py-5 mt-6 uppercase text-[11px] font-black tracking-widest">Confirmer sur WhatsApp</button>
+            <button onclick="toggleModal('devisModal', false)" class="w-full mt-4 text-gray-500 text-[10px] font-bold uppercase">Retour</button>
         </div>
     </div>
 
     <div id="reviewsModal" class="modal">
         <div class="modal-content">
-            <h2 class="gold-text text-xl font-black mb-4 text-center">Avis</h2>
-            <p class="text-[11px] italic text-gray-300">"Service incroyable !" - Marie K.</p>
-            <button onclick="toggleModal('reviewsModal', false)" class="w-full mt-6 text-gold text-[10px] uppercase">Fermer</button>
+            <h2 class="gold-text text-xl font-black italic mb-6">VOTRE EXPÉRIENCE</h2>
+            
+            <div id="reviews-list" class="space-y-4 mb-8">
+                <div class="border-l border-gold/30 pl-4 py-1">
+                    <p class="text-xs italic text-gray-300">"Un show inoubliable pour notre mariage. Merci !"</p>
+                    <p class="text-[9px] font-bold text-gold mt-1">— Christian B.</p>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-6">
+                <p class="text-[10px] font-bold uppercase text-gray-400 mb-2">Laisser un avis</p>
+                <input type="text" id="rev-name" placeholder="Votre Nom">
+                <textarea id="rev-text" rows="2" placeholder="Votre message..."></textarea>
+                <button onclick="addReview()" class="w-full btn-gold py-3 mt-4 text-[10px] uppercase">Publier</button>
+            </div>
+            <button onclick="toggleModal('reviewsModal', false)" class="w-full mt-4 text-gray-500 text-[10px] uppercase">Fermer</button>
+        </div>
+    </div>
+
+    <div id="packModal" class="modal">
+        <div class="modal-content">
+            <div id="p-gallery" class="pack-gallery"></div>
+            <h2 id="p-title" class="gold-text text-2xl font-black italic mb-2"></h2>
+            <p id="p-desc" class="text-xs text-gray-400 leading-relaxed mb-8"></p>
+            <button onclick="toggleModal('packModal', false)" class="w-full btn-gold py-4 uppercase text-[10px] font-black">Fermer la vue</button>
+        </div>
+    </div>
+
+    <div id="discoveryModal" class="modal">
+        <div class="modal-content text-center">
+            <h2 class="gold-text text-xl font-black italic mb-6">GALERIE VIDÉO</h2>
+            <p class="text-xs text-gray-400 mb-8">Découvrez nos derniers shows fumants en direct sur nos réseaux sociaux.</p>
+            <div class="space-y-4">
+                <a href="https://www.tiktok.com/@shakeandsmilecocktail" class="block w-full py-4 border border-white/10 rounded-2xl text-[10px] font-bold uppercase tracking-widest"><i class="fa-brands fa-tiktok mr-2"></i> TikTok</a>
+                <a href="https://www.instagram.com/shake.andsmile" class="block w-full py-4 border border-white/10 rounded-2xl text-[10px] font-bold uppercase tracking-widest"><i class="fa-brands fa-instagram mr-2"></i> Instagram</a>
+            </div>
+            <button onclick="toggleModal('discoveryModal', false)" class="mt-8 text-gray-500 text-[10px] uppercase">Fermer</button>
         </div>
     </div>
 
     <script>
-        // Fonction pour ouvrir/fermer n'importe quel modal
         function toggleModal(id, show) { 
             const m = document.getElementById(id);
-            if(m) m.style.display = show ? 'flex' : 'none'; 
+            const body = document.body;
+            if(show) {
+                m.style.display = 'flex';
+                body.classList.add('modal-open');
+            } else {
+                m.style.display = 'none';
+                body.classList.remove('modal-open');
+            }
         }
         
-        // Fonction pour afficher les détails d'un pack
         function openPack(title, desc, imgs) {
             document.getElementById('p-title').innerText = title;
             document.getElementById('p-desc').innerText = desc;
             const gallery = document.getElementById('p-gallery');
             gallery.innerHTML = ''; 
             imgs.forEach(src => {
-                const img = document.createElement('img'); 
-                img.src = src; 
-                img.className = "pack-img"; 
-                gallery.appendChild(img);
+                gallery.innerHTML += `<img src="${src}" class="pack-img shadow-xl">`;
             });
             toggleModal('packModal', true);
         }
 
-        // Envoi WhatsApp
+        function addReview() {
+            const name = document.getElementById('rev-name').value;
+            const text = document.getElementById('rev-text').value;
+            if(!name || !text) return;
+
+            const list = document.getElementById('reviews-list');
+            const newRev = document.createElement('div');
+            newRev.className = "border-l border-gold/30 pl-4 py-1 animate__animated animate__fadeInLeft";
+            newRev.innerHTML = `<p class="text-xs italic text-gray-300">"${text}"</p><p class="text-[9px] font-bold text-gold mt-1">— ${name}</p>`;
+            list.prepend(newRev);
+
+            document.getElementById('rev-name').value = '';
+            document.getElementById('rev-text').value = '';
+        }
+
         function sendDevisFull() {
             const nom = document.getElementById('f-nom').value;
             const event = document.getElementById('f-event').value;
@@ -162,14 +245,13 @@
             const invites = document.getElementById('f-invites').value;
             const pack = document.getElementById('f-pack').value;
 
-            if(!nom || !event || !date) { alert("Champs obligatoires manquants"); return; }
+            if(!nom || !event || !date) { alert("Veuillez remplir les informations essentielles."); return; }
 
-            const message = `*DEVIS SHAKE %26 SMILE*%0A👤 Nom: ${nom}%0A🍸 Event: ${event}%0A📅 Date: ${date}%0A📍 Lieu: ${lieu}%0A👥 Invités: ${invites}%0A✨ Pack: ${pack}`;
+            const message = `*DEMANDE DE DEVIS PRIVÉ*%0A--------------------------%0A👤 *Client :* ${nom}%0A🍸 *Événement :* ${event}%0A📅 *Date :* ${date}%0A📍 *Lieu :* ${lieu}%0A👥 *Invités :* ${invites}%0A✨ *Formule :* ${pack}%0A--------------------------`;
             window.open(`https://wa.me/243978355121?text=${message}`, '_blank');
         }
 
-        // Fermeture au clic extérieur
-        window.onclick = function(e) { if(e.target.className === 'modal') e.target.style.display = 'none'; }
+        window.onclick = function(e) { if(e.target.className === 'modal') toggleModal(e.target.id, false); }
     </script>
 </body>
 </html>
