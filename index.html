@@ -28,7 +28,6 @@
         .btn-gold { background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%); color: #000; font-weight: 900; border-radius: 18px; }
         input, select, textarea { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(212, 175, 55, 0.3) !important; color: white !important; padding: 12px !important; border-radius: 12px !important; width: 100%; margin-top: 8px; }
 
-        /* Grille pour deux images dans la modale */
         .pack-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
         .pack-img { width: 100%; h-32 object-cover rounded-2xl border border-white/10; }
     </style>
@@ -93,13 +92,12 @@
 
     <a href="https://wa.me/243978355121" class="glow-item p-5 flex items-center justify-center gap-3 mb-20 border-green-500/20">
         <i class="fa-brands fa-whatsapp text-green-500 text-2xl"></i>
-        <span class="text-[11px] font-black uppercase tracking-widest">Discuter avec Corneille</span>
+        <span class="text-[11px] font-black uppercase tracking-widest">Discuter avec Shake & Smile</span>
     </a>
 
     <div id="packModal" class="modal">
         <div class="modal-content animate__animated animate__zoomIn">
-            <div id="p-gallery" class="pack-gallery">
-                </div>
+            <div id="p-gallery" class="pack-gallery"></div>
             <h2 id="p-title" class="gold-text text-xl font-black italic mb-4"></h2>
             <p id="p-desc" class="text-xs text-gray-400 leading-relaxed mb-8"></p>
             <button onclick="toggleModal('packModal', false)" class="w-full btn-gold py-4 uppercase text-[10px] font-black">Fermer</button>
@@ -143,7 +141,7 @@
             document.getElementById('pay-link').href = link;
             toggleModal('payModal', true);
         }
-        function loadReviews() { /* Déjà configuré */ }
+        function loadReviews() { /* Logic for reviews */ }
         window.onclick = function(e) { if(e.target.className === 'modal') e.target.style.display = 'none'; }
     </script>
 </body>
