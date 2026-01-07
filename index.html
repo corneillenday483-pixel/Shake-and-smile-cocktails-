@@ -29,10 +29,10 @@
         input, select, textarea { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(212, 175, 55, 0.3) !important; color: white !important; padding: 12px !important; border-radius: 12px !important; width: 100%; margin-top: 8px; }
 
         .pack-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .pack-img { width: 100%; height: 120px; object-cover rounded-2xl border border-white/10; }
+        .pack-img { width: 100%; height: 120px; object-fit: cover; border-radius: 15px; border: 1px solid rgba(212,175,55,0.2); }
     </style>
 </head>
-<body class="max-w-md mx-auto px-6 py-10" onload="loadReviews()">
+<body class="max-w-md mx-auto px-6 py-10">
 
     <div class="smoke-container"><div class="smoke-layer"></div></div>
 
@@ -85,8 +85,14 @@
     <div class="glow-item p-10 text-center mb-12">
         <h2 class="text-[9px] font-black text-gray-500 uppercase tracking-widest mb-8 italic">Paiement Sécurisé</h2>
         <div class="flex justify-around items-center">
-            <div onclick="openPay('Orange Money', '084 061 284 9', 'https://onelink.to/xhrz5g')" class="cursor-pointer"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" class="w-12 h-12 rounded-xl mb-2"><p class="text-[9px] font-bold text-orange-500">ORANGE</p></div>
-            <div onclick="openPay('Airtel Money', '097 835 512 1', 'https://bit.ly/appsairtel')" class="cursor-pointer"><div class="w-12 h-12 bg-[#e11d48] rounded-full flex items-center justify-center mb-2 font-black italic">A</div><p class="text-[9px] font-bold text-red-500 uppercase">AIRTEL</p></div>
+            <div onclick="openPay('Orange Money', '084 061 284 9', 'https://onelink.to/xhrz5g')" class="cursor-pointer">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" class="w-12 h-12 rounded-xl mb-2">
+                <p class="text-[9px] font-bold text-orange-500">ORANGE</p>
+            </div>
+            <div onclick="openPay('Airtel Money', '097 835 512 1', 'https://bit.ly/appsairtel')" class="cursor-pointer">
+                <div class="w-12 h-12 bg-[#e11d48] rounded-full flex items-center justify-center mb-2 font-black italic">A</div>
+                <p class="text-[9px] font-bold text-red-500 uppercase">AIRTEL</p>
+            </div>
         </div>
     </div>
 
@@ -95,16 +101,21 @@
         <span class="text-[11px] font-black uppercase tracking-widest">Discuter avec Shake & Smile</span>
     </a>
 
-    <div id="packModal" class="modal">
-        <div class="modal-content animate__animated animate__zoomIn">
-            <div id="p-gallery" class="pack-gallery"></div>
-            <h2 id="p-title" class="gold-text text-xl font-black italic mb-4"></h2>
-            <p id="p-desc" class="text-xs text-gray-400 leading-relaxed mb-8"></p>
-            <button onclick="toggleModal('packModal', false)" class="w-full btn-gold py-4 uppercase text-[10px] font-black">Fermer</button>
+    <div id="payModal" class="modal">
+        <div class="modal-content text-center">
+            <h2 id="pay-title" class="gold-text text-xl font-black mb-6 italic uppercase"></h2>
+            <div class="bg-white/5 p-6 rounded-3xl border border-white/10 mb-6">
+                <p class="text-[9px] text-gray-500 uppercase mb-2">Numéro de transfert</p>
+                <p id="pay-num" class="text-2xl font-black text-white font-mono"></p>
+                <p class="text-[10px] text-gold mt-4 font-black uppercase">Shake & Smile</p>
+            </div>
+            <a id="pay-link" href="#" target="_blank" class="w-full btn-gold py-4 block uppercase text-[10px] font-black mb-4">Ouvrir l'application</a>
+            <button onclick="toggleModal('payModal', false)" class="text-gray-400 text-[10px] font-bold uppercase">Retour</button>
         </div>
     </div>
 
-    <div id="devisModal" class="modal"><div class="modal-content"><h2 class="gold-text text-xl font-black italic mb-6 uppercase">Votre Devis</h2><div class="space-y-1"><input type="text" id="f-nom" placeholder="Nom complet"><input type="text" id="f-event" placeholder="Evénement (Mariage, Fête...)"><input type="text" id="f-date" placeholder="Date et Heure"><input type="text" id="f-addr" placeholder="Lieu"><input type="number" id="f-qty" placeholder="Invités"><select id="f-pack"><option value="Platinum Prestige">Platinum Prestige</option><option value="Gold Experience">Gold Experience</option><option value="Fresh Smile">Fresh Smile</option></select><button onclick="sendDevis()" class="w-full btn-gold py-5 mt-4 uppercase text-[11px] font-black">Envoyer ma demande</button></div></div></div>
+    <div id="packModal" class="modal"><div class="modal-content"><div id="p-gallery" class="pack-gallery"></div><h2 id="p-title" class="gold-text text-xl font-black italic mb-4"></h2><p id="p-desc" class="text-xs text-gray-400 leading-relaxed mb-8"></p><button onclick="toggleModal('packModal', false)" class="w-full btn-gold py-4 uppercase text-[10px] font-black">Fermer</button></div></div>
+    <div id="devisModal" class="modal"><div class="modal-content"><h2 class="gold-text text-xl font-black italic mb-6 uppercase">Votre Devis</h2><div class="space-y-1"><input type="text" id="f-nom" placeholder="Nom complet"><input type="text" id="f-event" placeholder="Mariage, Fête..."><input type="text" id="f-date" placeholder="Date/Heure"><input type="text" id="f-addr" placeholder="Lieu"><input type="number" id="f-qty" placeholder="Invités"><select id="f-pack"><option value="Platinum Prestige">Platinum Prestige</option><option value="Gold Experience">Gold Experience</option><option value="Fresh Smile">Fresh Smile</option></select><button onclick="sendDevis()" class="w-full btn-gold py-5 mt-4 uppercase text-[11px] font-black">Envoyer ma demande</button></div></div></div>
 
     <script>
         function toggleModal(id, show) { document.getElementById(id).style.display = show ? 'flex' : 'none'; }
@@ -117,22 +128,10 @@
             imgs.forEach(src => {
                 const img = document.createElement('img');
                 img.src = src;
-                img.className = "pack-img w-full object-cover rounded-xl border border-white/10";
+                img.className = "pack-img";
                 gallery.appendChild(img);
             });
             toggleModal('packModal', true);
-        }
-
-        function sendDevis() {
-            const nom = document.getElementById('f-nom').value;
-            const ev = document.getElementById('f-event').value;
-            const dt = document.getElementById('f-date').value;
-            const ad = document.getElementById('f-addr').value;
-            const qt = document.getElementById('f-qty').value;
-            const pk = document.getElementById('f-pack').value;
-            if(!nom || !ev) { alert("Nom et événement requis."); return; }
-            const text = `*DEMANDE DE DEVIS SHAKE %26 SMILE*%0A----------------------------%0A*Client :* ${nom}%0A*Event :* ${ev}%0A*Date :* ${dt}%0A*Lieu :* ${ad}%0A*Invités :* ${qt}%0A*Pack :* ${pk}%0A----------------------------`;
-            window.open(`https://wa.me/243978355121?text=${text}`, '_blank');
         }
 
         function openPay(name, num, link) {
@@ -141,7 +140,14 @@
             document.getElementById('pay-link').href = link;
             toggleModal('payModal', true);
         }
-        function loadReviews() { /* Logic as before */ }
+
+        function sendDevis() {
+            const nom = document.getElementById('f-nom').value;
+            const ev = document.getElementById('f-event').value;
+            const text = `*DEMANDE DE DEVIS SHAKE %26 SMILE*%0A----------------------------%0A*Client :* ${nom}%0A*Event :* ${ev}%0A*Pack :* ${document.getElementById('f-pack').value}`;
+            window.open(`https://wa.me/243978355121?text=${text}`, '_blank');
+        }
+
         window.onclick = function(e) { if(e.target.className === 'modal') e.target.style.display = 'none'; }
     </script>
 </body>
