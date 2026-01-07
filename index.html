@@ -3,243 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shake & Smile | L'Art du Cocktail</title>
+    <title>Shake & Smile | Prestige Mixologie</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Inter:wght@300;600;900&display=swap');
+
+        :root { --gold: #D4AF37; --dark-bg: #050505; }
 
         body { 
-            background: radial-gradient(circle at top, #1a1a1a 0%, #000000 100%); 
-            color: #e5e5e5; font-family: 'Inter', sans-serif; min-height: 100vh; margin: 0;
-            overflow-x: hidden;
+            background-color: var(--dark-bg);
+            color: #fff; font-family: 'Inter', sans-serif;
+            overflow-x: hidden; scroll-behavior: smooth;
         }
-        .gold-text { color: #D4AF37; }
+
+        /* FUMÉE ANIMÉE DYNAMIQUE SUR TOUT LE SITE */
+        .smoke-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; background: #000; overflow: hidden;
+        }
+        .smoke-layer {
+            position: absolute; width: 200%; height: 200%;
+            background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+            opacity: 0.3; animation: smokeFloat 20s linear infinite;
+        }
+        @keyframes smokeFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-5%, -10%) rotate(2deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        .gold-glow {
+            position: absolute; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%; filter: blur(80px);
+            animation: pulseGlow 15s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            from { transform: translate(-20%, -20%) scale(1); opacity: 0.5; }
+            to { transform: translate(30%, 30%) scale(1.3); opacity: 0.8; }
+        }
+
+        /* LOGO SANS ARRIÈRE-PLAN (COLOR-DODGE) */
+        .logo-transparent {
+            mix-blend-mode: screen; /* Supprime le fond noir du logo */
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+        }
+
+        .gold-text { 
+            background: linear-gradient(to right, #D4AF37, #FBF5B7, #D4AF37); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        }
+
+        /* CARTES ET POPUPS GLASSMORPHISM */
         .app-card { 
-            background: rgba(26, 26, 26, 0.8); backdrop-filter: blur(10px);
-            border-radius: 24px; border: 1px solid rgba(212, 175, 55, 0.15);
-            margin-bottom: 20px; overflow: hidden;
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px);
+            border-radius: 40px; border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
+        .app-card:hover { transform: translateY(-10px); border-color: var(--gold); }
+
+        .modal { 
+            display: none; position: fixed; inset: 0; 
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(40px);
+            z-index: 9999; align-items: center; justify-content: center; padding: 20px;
+        }
+        .modal-content {
+            background: linear-gradient(135deg, rgba(40,40,40,0.8), rgba(10,10,10,0.95));
+            border: 1px solid var(--gold); border-radius: 40px; width: 100%; max-width: 400px; padding: 35px;
+        }
+
         .btn-gold { 
             background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%); 
-            color: #000; font-weight: 800; border-radius: 16px; transition: 0.3s;
+            color: #000; font-weight: 900; border-radius: 20px; box-shadow: 0 10px 30px rgba(212,175,55,0.3);
         }
-        .btn-gold:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
-        
-        /* Effet Fumée Platinum */
-        .smoke-effect { position: relative; overflow: hidden; }
-        .smoke-overlay {
-            position: absolute; top: 0; left: 0; width: 200%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
-            opacity: 0.2; animation: smokeMove 15s linear infinite;
-        }
-        @keyframes smokeMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-        /* Modal Style */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
-        .modal.active { display: flex; }
-        input, select { 
-            background: #1a1a1a; border: 1px solid #333; color: white; 
-            padding: 12px; border-radius: 10px; width: 100%; margin-top: 5px; font-size: 14px;
-        }
-        .logo-box { border: 2px solid #D4AF37; box-shadow: 0 0 25px rgba(212, 175, 55, 0.3); }
     </style>
 </head>
-<body class="max-w-md mx-auto px-4 py-8">
+<body class="max-w-md mx-auto px-6 py-10">
 
-    <header class="text-center mb-8 animate__animated animate__fadeInDown">
-        <div class="relative inline-block">
-            <img src="1767271665944 (3).png" alt="Shake & Smile" class="w-32 h-32 rounded-full logo-box mx-auto mb-4 object-cover">
-            <div class="absolute inset-0 rounded-full border border-[#D4AF37] animate-ping opacity-20"></div>
+    <div class="smoke-container">
+        <div class="smoke-layer"></div>
+        <div class="gold-glow" style="top: -10%; left: -20%;"></div>
+        <div class="gold-glow" style="bottom: -10%; right: -20%; animation-delay: -5s;"></div>
+    </div>
+
+    <header class="text-center mb-16 animate__animated animate__fadeIn">
+        <div class="relative inline-block mb-6">
+            <img src="1767271665944 (3).png" class="w-44 h-44 logo-transparent mx-auto object-contain">
         </div>
-        <h1 class="text-3xl font-black gold-text tracking-tighter uppercase italic" style="font-family: 'Playfair Display';">Shake & Smile</h1>
-        <p class="text-[10px] tracking-[0.4em] uppercase opacity-60 mt-2">L'art du cocktail s'invite chez vous</p>
+        <h1 class="text-4xl font-black gold-text italic tracking-tighter" style="font-family: 'Playfair Display';">Shake & Smile</h1>
+        <p class="text-[10px] tracking-[0.5em] uppercase text-gray-500 mt-4 font-bold">L'art du cocktail s'invite chez vous</p>
     </header>
 
-    <div class="grid grid-cols-1 gap-4 mb-10 animate__animated animate__fadeInUp">
-        <button onclick="toggleModal(true)" class="btn-gold py-5 text-xs uppercase tracking-widest shadow-lg">
-            <i class="fa-solid fa-file-signature mr-2"></i> Obtenir un Devis Rapide
+    <div class="space-y-4 mb-16">
+        <button onclick="toggleModal('devisModal', true)" class="w-full btn-gold py-6 text-sm uppercase tracking-widest animate__animated animate__pulse animate__infinite">
+            <i class="fa-solid fa-crown mr-2"></i> Demander un Devis
         </button>
-        <div class="grid grid-cols-2 gap-3">
-            <a href="https://www.instagram.com/shake.andsmile" class="bg-zinc-900/50 rounded-xl flex items-center justify-center py-4 text-[10px] font-bold uppercase border border-zinc-800">
+        <div class="grid grid-cols-2 gap-4">
+            <a href="https://www.instagram.com/shake.andsmile" class="app-card flex items-center justify-center py-4 text-[10px] font-black uppercase">
                 <i class="fa-brands fa-instagram gold-text mr-2"></i> Instagram
             </a>
-            <a href="https://tiktok.com/@shakeandsmilecocktail" class="bg-zinc-900/50 rounded-xl flex items-center justify-center py-4 text-[10px] font-bold uppercase border border-zinc-800">
+            <a href="https://tiktok.com/@shakeandsmilecocktail" class="app-card flex items-center justify-center py-4 text-[10px] font-black uppercase">
                 <i class="fa-brands fa-tiktok gold-text mr-2"></i> TikTok
             </a>
         </div>
     </div>
 
-    <h2 class="text-center text-[10px] font-black mb-6 gold-text uppercase tracking-[0.3em]">🍸 Nos Formules d'Exception</h2>
-    
-    <div class="app-card animate__animated animate__fadeInLeft">
-        <div class="h-32 bg-zinc-800 flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=400')] bg-cover bg-center">
-            <div class="bg-black/40 inset-0 w-full h-full flex items-center justify-center backdrop-blur-[2px]">
-                <i class="fa-solid fa-glass-water-droplet text-4xl text-blue-300"></i>
+    <div class="space-y-12">
+        <div class="app-card overflow-hidden animate__animated animate__fadeInUp">
+            <div class="h-48 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-1000 hover:scale-110">
+            </div>
+            <div class="p-8">
+                <h3 class="text-2xl font-black gold-text italic">🥇 Platinum Prestige</h3>
+                <p class="text-xs text-gray-300 mt-4 leading-relaxed font-medium">Show magistral avec <b>fumée aromatique</b>. Cocktails Arc-en-ciel & spécialités. Décoration premium riche.</p>
             </div>
         </div>
-        <div class="p-5">
-            <h3 class="font-black text-white italic">🥉 Formule Fresh Smile (L'Essentiel)</h3>
-            <p class="text-[9px] text-gray-400 mt-1 mb-4">Une solution fluide pour un rafraîchissement immédiat.</p>
-            <ul class="text-[11px] space-y-2 text-gray-300">
-                <li>• <b>Cocktails :</b> Recettes classiques (1 à 2 couleurs).</li>
-                <li>• <b>Carte :</b> 2 saveurs (uniquement sans alcool).</li>
-                <li>• <b>Service :</b> Gobelets jetables.</li>
-            </ul>
-        </div>
-    </div>
 
-    <div class="app-card animate__animated animate__fadeInRight" style="border-color: rgba(212, 175, 55, 0.4);">
-        <div class="h-32 bg-[url('https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&q=80&w=400')] bg-cover bg-center">
-            <div class="bg-black/20 inset-0 w-full h-full flex items-center justify-center backdrop-blur-[1px]">
-                <i class="fa-solid fa-martini-glass-citrus text-4xl gold-text animate__pulse"></i>
+        <div class="app-card overflow-hidden animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+            <div class="h-48 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover transition-transform duration-1000 hover:scale-110">
+            </div>
+            <div class="p-8">
+                <h3 class="text-2xl font-black text-white italic">🥈 Gold Experience</h3>
+                <p class="text-xs text-gray-400 mt-4 leading-relaxed">Convivialité et esthétique. Cocktails classiques et Arc-en-ciel en verres incassables élégants.</p>
             </div>
         </div>
-        <div class="p-5">
-            <h3 class="font-black text-white italic">🥈 Formule Gold Experience (Signature)</h3>
-            <p class="text-[9px] text-gray-400 mt-1 mb-4">L'équilibre parfait entre esthétique et convivialité.</p>
-            <ul class="text-[11px] space-y-2 text-gray-300">
-                <li>• <b>Cocktails :</b> Classiques et célèbres "Arc-en-ciel".</li>
-                <li>• <b>Carte :</b> 2 saveurs (avec ou sans alcool).</li>
-                <li>• <b>Service :</b> Gobelets incassables robustes.</li>
-            </ul>
-        </div>
     </div>
 
-    <div class="app-card smoke-effect animate__animated animate__fadeInUp" style="border-width: 2px; border-color: #D4AF37;">
-        <div class="smoke-overlay"></div>
-        <div class="h-40 bg-[url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=400')] bg-cover bg-center">
-            <div class="bg-black/40 inset-0 w-full h-full flex flex-col items-center justify-center backdrop-blur-[1px]">
-                <i class="fa-solid fa-wand-magic-sparkles text-5xl gold-text"></i>
-                <span class="text-[8px] text-white font-bold mt-2 tracking-widest animate-pulse text-center px-4">SPECTACLE DE FUMÉE AROMATIQUE INCLUS</span>
-            </div>
-        </div>
-        <div class="p-5 relative">
-            <h3 class="font-black gold-text italic text-xl uppercase tracking-tighter">🥇 Platinum Prestige (Ultime)</h3>
-            <p class="text-[11px] text-gray-200 mt-2 mb-4 leading-relaxed font-bold">Le grand show visuel et gustatif pour vos événements d'exception.</p>
-            <ul class="text-[11px] space-y-2 text-gray-300">
-                <li>• <b>Spectacle :</b> Effet de fumée aromatique sur chaque verre.</li>
-                <li>• <b>Carte :</b> 3 saveurs + "La Spéciale de la Maison".</li>
-                <li>• <b>Décor :</b> Fruits frais, menthe éclatante et givrage.</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="app-card p-6 text-center bg-zinc-900/40">
-        <h2 class="gold-text text-[10px] font-black uppercase mb-4 tracking-[0.3em]">Nos Services</h2>
-        <p class="text-xs leading-relaxed text-gray-400 uppercase font-bold tracking-tighter">
-            Mariages • Dotes • Anniversaires • Remises de Diplômes • Galas • Soirées Privées
-        </p>
-    </div>
-
-    <div class="app-card p-6 animate__animated animate__fadeInUp">
-        <h2 class="text-center text-[10px] font-black mb-6 tracking-[0.3em] uppercase text-gray-400">Règlement Rapide</h2>
-        <div class="flex justify-around items-center gap-6">
+    <div class="app-card p-10 mt-20 animate__animated animate__fadeInUp">
+        <h2 class="text-center text-[10px] font-black text-gray-500 uppercase tracking-[0.5em] mb-10">Règlement Rapide</h2>
+        <div class="flex justify-around items-center">
             <div onclick="selectPay('O')" class="text-center cursor-pointer group">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" class="w-14 h-14 rounded-2xl shadow-lg mb-2 mx-auto group-active:scale-90 transition">
-                <p class="text-[9px] font-bold text-orange-500 uppercase">Orange</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" class="w-16 h-16 rounded-[2rem] mb-4 shadow-xl group-hover:scale-110 transition">
+                <p class="text-[10px] font-black text-orange-500">ORANGE</p>
             </div>
             <div onclick="selectPay('A')" class="text-center cursor-pointer group">
-                <div class="w-14 h-14 bg-white rounded-2xl shadow-lg mb-2 mx-auto flex items-center justify-center p-2 group-active:scale-90 transition">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Airtel_logo_new.svg" class="w-full h-auto">
+                <div class="w-16 h-16 bg-[#e11d48] rounded-full flex items-center justify-center mb-4 border-4 border-white/20 group-hover:scale-110 transition">
+                    <span class="text-white text-3xl font-black italic">A</span>
                 </div>
-                <p class="text-[9px] font-bold text-red-600 uppercase">Airtel</p>
+                <p class="text-[10px] font-black text-red-500 uppercase">AIRTEL</p>
             </div>
         </div>
-        <div id="pay-details" class="hidden mt-6 p-5 bg-black/60 rounded-2xl border border-[#D4AF37]/30 text-center animate__animated animate__zoomIn">
-            <p id="pay-name" class="text-[9px] font-black mb-2 tracking-widest uppercase"></p>
-            <p id="pay-num" class="text-xl font-mono font-bold gold-text mb-4"></p>
-            <p class="text-[10px] text-gray-500 uppercase">Propriétaire: <span class="text-white">Corneille Nday</span></p>
+        <div id="pay-box" class="hidden mt-10 p-6 bg-white/5 rounded-[2rem] border border-white/10 text-center animate__animated animate__zoomIn">
+            <p id="pay-name" class="text-[9px] font-bold tracking-widest uppercase mb-2 text-gray-400"></p>
+            <p id="pay-num" class="text-2xl font-black text-white"></p>
         </div>
     </div>
 
-    <div class="app-card p-6 border-l-4 border-red-900">
-        <h2 class="text-white text-[10px] font-black uppercase mb-4 tracking-widest">Conditions de Service</h2>
-        <ul class="text-[10px] space-y-3 text-gray-400 font-medium">
-            <li class="flex items-start"><span class="gold-text mr-2">1.</span> Le transport est à la charge du client (prix fixé selon l'adresse).</li>
-            <li class="flex items-start"><span class="gold-text mr-2">2.</span> Le paiement intégral doit être effectué avant la prestation.</li>
-            <li class="flex items-start"><span class="gold-text mr-2">3.</span> Les ingrédients (jus, sirops, fruits, etc.) sont à la charge du client.</li>
-            <li class="flex items-start"><span class="gold-text mr-2">4.</span> L'heure de début fixée par le client doit être scrupuleusement respectée.</li>
-            <li class="flex items-start"><span class="gold-text mr-2">5.</span> Aucun manque de respect envers l'équipe ne sera toléré.</li>
+    <div class="mt-20 text-center">
+        <h2 class="gold-text font-black uppercase tracking-[0.3em] text-[10px] mb-8">Témoignages</h2>
+        <div class="app-card p-8 italic text-sm text-gray-300">
+            "Une expérience incroyable. La fumée Platinum a bluffé tous mes invités !"
+            <p class="mt-4 font-black text-white not-italic text-[10px] tracking-widest uppercase">— Sarah K., Mariage Prestige</p>
+        </div>
+        <button onclick="toggleModal('reviewModal', true)" class="mt-8 text-[9px] font-black border-b-2 border-gold/50 text-gold uppercase tracking-[0.4em] pb-1">Laisser un avis</button>
+    </div>
+
+    <div class="app-card p-10 mt-20 border-l-4 border-red-900">
+        <h2 class="text-white text-[10px] font-black uppercase mb-6 tracking-widest">Conditions</h2>
+        <ul class="text-[11px] space-y-4 text-gray-400">
+            <li><span class="gold-text mr-2">1.</span> Transport à la charge du client.</li>
+            <li><span class="gold-text mr-2">2.</span> Paiement complet avant prestation.</li>
+            <li><span class="gold-text mr-2">3.</span> Ingrédients à la charge du client.</li>
+            <li><span class="gold-text mr-2">4.</span> Ponctualité exigée.</li>
+            <li><span class="gold-text mr-2">5.</span> Respect mutuel obligatoire.</li>
         </ul>
     </div>
 
-    <footer class="mt-12 mb-10 text-center opacity-40">
-        <p class="text-[8px] uppercase tracking-[0.5em]">© 2026 Shake & Smile • Excellence Mixologie</p>
+    <footer class="mt-24 mb-12 text-center opacity-30">
+        <p class="text-[9px] uppercase tracking-[0.6em] font-bold">© 2026 Shake & Smile • Excellence Mixologie</p>
     </footer>
 
     <div id="devisModal" class="modal">
-        <div class="bg-zinc-900 w-full max-w-sm rounded-3xl p-6 border border-zinc-700 animate__animated animate__zoomIn">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="gold-text font-bold uppercase text-[10px] tracking-widest italic">Devis Personnalisé</h2>
-                <button onclick="toggleModal(false)" class="text-white text-2xl">&times;</button>
+        <div class="modal-content animate__animated animate__zoomIn">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="gold-text text-xl font-black italic uppercase">Votre Devis</h2>
+                <button onclick="toggleModal('devisModal', false)" class="text-white text-3xl">&times;</button>
             </div>
-            
-            <div class="space-y-4 text-[11px] text-gray-400">
-                <div><label class="font-bold">VOTRE NOM COMPLET</label><input type="text" id="form-nom" placeholder="Ex: Corneille Nday"></div>
-                <div><label class="font-bold">TYPE D'ÉVÉNEMENT</label><input type="text" id="form-event" placeholder="Ex: Mariage, Dote..."></div>
-                <div><label class="font-bold">DATE ET HEURE</label><input type="text" id="form-date" placeholder="Ex: 24 Juin à 16h00"></div>
-                <div><label class="font-bold">ADRESSE PRÉCISE</label><input type="text" id="form-addr" placeholder="Ex: Gombe, Av. du Port"></div>
-                <div><label class="font-bold">NOMBRE DE PERSONNES</label><input type="number" id="form-qty" placeholder="Ex: 150"></div>
-                <div>
-                    <label class="font-bold">CHOIX DE LA FORMULE</label>
-                    <select id="form-pack">
-                        <option value="Fresh Smile">🥉 Fresh Smile (L'Essentiel)</option>
-                        <option value="Gold Experience">🥈 Gold Experience (Signature)</option>
-                        <option value="Platinum Prestige" selected>🥇 Platinum Prestige (Ultime)</option>
-                    </select>
-                </div>
-                
-                <button onclick="sendToWhatsApp()" class="w-full btn-gold py-4 mt-4 uppercase text-[10px] tracking-widest">
-                    Envoyer ma demande
-                </button>
+            <div class="space-y-2">
+                <input type="text" id="f-nom" placeholder="Nom Complet">
+                <input type="text" id="f-event" placeholder="Type d'événement">
+                <input type="text" id="f-date" placeholder="Date et Heure">
+                <input type="text" id="f-addr" placeholder="Adresse précise">
+                <input type="number" id="f-qty" placeholder="Nombre d'invités">
+                <select id="f-pack" class="w-full">
+                    <option value="Platinum Prestige">🥇 Platinum Prestige</option>
+                    <option value="Gold Experience">🥈 Gold Experience</option>
+                    <option value="Fresh Smile">🥉 Fresh Smile</option>
+                </select>
+                <button onclick="sendDevis()" class="w-full btn-gold py-5 mt-6 uppercase text-[11px] tracking-widest">Envoyer la demande</button>
             </div>
+        </div>
+    </div>
+
+    <div id="reviewModal" class="modal">
+        <div class="modal-content text-center">
+            <h2 class="gold-text text-xl font-black mb-6">Votre Expérience</h2>
+            <textarea placeholder="Votre avis..." class="w-full h-32 bg-white/5 border border-white/10 rounded-2xl p-4 text-white outline-none"></textarea>
+            <button onclick="toggleModal('reviewModal', false)" class="w-full btn-gold py-5 mt-6 uppercase text-[11px]">Publier</button>
         </div>
     </div>
 
     <script>
-        function toggleModal(show) {
-            document.getElementById('devisModal').classList.toggle('active', show);
-        }
+        function toggleModal(id, show) { document.getElementById(id).style.display = show ? 'flex' : 'none'; }
 
         function selectPay(op) {
-            const box = document.getElementById('pay-details');
+            const box = document.getElementById('pay-box');
             box.classList.remove('hidden');
-            const title = document.getElementById('pay-name');
-            const num = document.getElementById('pay-num');
             if(op === 'O') {
-                title.innerText = "Orange Money"; title.style.color = "#ff7900";
-                num.innerText = "084 061 284 9";
+                document.getElementById('pay-name').innerText = "Orange Money";
+                document.getElementById('pay-num').innerText = "084 061 284 9";
             } else {
-                title.innerText = "Airtel Money"; title.style.color = "#e11d48";
-                num.innerText = "097 835 512 1";
+                document.getElementById('pay-name').innerText = "Airtel Money";
+                document.getElementById('pay-num').innerText = "097 835 512 1";
             }
         }
 
-        function sendToWhatsApp() {
-            const nom = document.getElementById('form-nom').value;
-            const event = document.getElementById('form-event').value;
-            const date = document.getElementById('form-date').value;
-            const addr = document.getElementById('form-addr').value;
-            const qty = document.getElementById('form-qty').value;
-            const pack = document.getElementById('form-pack').value;
-
-            if(!nom || !event || !date || !addr) { 
-                alert("Veuillez remplir tous les champs pour votre devis."); return; 
-            }
-
-            const message = `*DEMANDE DE DEVIS SHAKE-AND-SMILE-COCKTAILS*%0A%0A` +
-                            `*Client:* ${nom}%0A` +
-                            `*Type d'événement:* ${event}%0A` +
-                            `*Date et Heure:* ${date}%0A` +
-                            `*Adresse:* ${addr}%0A` +
-                            `*Nombre de personnes:* ${qty}%0A` +
-                            `*Formule choisie:* ${pack}%0A%0A` +
-                            `_Bonjour Shake-and-smile-cocktails, j'aimerais avoir un devis pour cet événement._`;
-
-            window.open(`https://wa.me/243978355121?text=${message}`, '_blank');
+        function sendDevis() {
+            const nom = document.getElementById('f-nom').value;
+            const event = document.getElementById('f-event').value;
+            const msg = `*DEVIS SHAKE-AND-SMILE-COCKTAILS*%0AClient: ${nom}%0AEvent: ${event}%0APack: ${document.getElementById('f-pack').value}`;
+            window.open(`https://wa.me/243978355121?text=${msg}`, '_blank');
         }
+
+        window.onclick = function(e) { if(e.target.className === 'modal') e.target.style.display = 'none'; }
     </script>
 </body>
 </html>
