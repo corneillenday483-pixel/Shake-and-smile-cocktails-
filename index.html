@@ -12,13 +12,13 @@
         :root { --gold: #D4AF37; }
 
         body { 
+            /* RETOUR À L'ARRIÈRE-PLAN INITIAL QUE TU AIMES */
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), 
                         url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=2000&auto=format&fit=crop'); 
             background-size: cover; background-position: center; background-attachment: fixed;
-            color: #fff; font-family: 'Inter', sans-serif; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #fff; font-family: 'Inter', sans-serif; transition: 0.5s ease;
         }
 
-        /* Effet flou global */
         body.modal-open #main-content { filter: blur(15px); transform: scale(0.98); }
 
         .gold-text { background: linear-gradient(to right, #D4AF37, #FBF5B7, #D4AF37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -28,9 +28,7 @@
             backdrop-filter: blur(15px); border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 24px; transition: all 0.4s ease;
         }
-        .glass-item:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 10px 25px rgba(212, 175, 55, 0.1); }
 
-        /* Fenêtres Pop-up Dark Frost Master */
         .modal { 
             display: none; position: fixed; inset: 0; 
             background: rgba(0,0,0,0.4); z-index: 9999; 
@@ -39,11 +37,10 @@
         .modal-content { 
             background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(45px); border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 40px; width: 100%; max-width: 400px; padding: 35px; 
-            max-height: 90vh; overflow-y: auto; box-shadow: 0 30px 70px rgba(0,0,0,0.9);
+            border-radius: 40px; width: 100%; max-width: 400px; padding: 35px; box-shadow: 0 30px 70px rgba(0,0,0,0.9);
         }
 
-        /* Design Premium des inputs (Lignes dorées) */
+        /* DESIGN PREMIUM FORMULAIRE (LIGNES DORÉES) */
         .premium-input {
             background: transparent !important; border: none !important;
             border-bottom: 1px solid rgba(212, 175, 55, 0.3) !important;
@@ -51,14 +48,12 @@
             padding: 12px 5px !important; margin-top: 15px !important;
             font-size: 14px; transition: 0.3s;
         }
-        .premium-input:focus { border-bottom: 1px solid var(--gold) !important; box-shadow: none !important; }
+        .premium-input:focus { border-bottom: 1px solid var(--gold) !important; outline: none; }
 
         .btn-gold { 
             background: linear-gradient(135deg, #D4AF37, #B8860B); color: #000; 
             font-weight: 900; border-radius: 20px; text-transform: uppercase;
-            letter-spacing: 1px; transition: 0.3s;
         }
-        .btn-gold:active { transform: scale(0.96); }
 
         .pack-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
         .pack-img { width: 100%; height: 120px; object-fit: cover; border-radius: 20px; border: 1px solid rgba(212,175,55,0.2); }
@@ -69,8 +64,8 @@
 <body class="max-w-md mx-auto px-6 py-10">
 
     <div id="main-content">
-        <header class="text-center mb-12 animate__animated animate__fadeIn">
-            <img src="1001036503.png" 
+        <header class="text-center mb-12">
+            <img src="https://raw.githubusercontent.com/corneillenday483-pixel/Shake-and-smile-cocktails-/main/1767271665944%20(3).png" 
                  class="w-44 h-44 mx-auto mb-2 object-contain filter drop-shadow(0 0 15px rgba(212,175,55,0.4))"
                  style="mix-blend-mode: screen;">
             <h1 class="text-3xl font-black gold-text italic tracking-tighter" style="font-family: 'Playfair Display';">Shake & Smile</h1>
@@ -78,7 +73,7 @@
         </header>
 
         <div class="space-y-4 mb-10">
-            <button onclick="toggleModal('devisModal', true)" class="w-full btn-gold py-6 text-sm glass-item" style="background: linear-gradient(135deg, #D4AF37, #B8860B); color: #000;">
+            <button onclick="toggleModal('devisModal', true)" class="w-full btn-gold py-6 text-sm glass-item">
                 <i class="fa-solid fa-feather-pointed mr-2"></i> Faire un Devis Prestige
             </button>
             <div class="grid grid-cols-2 gap-4">
@@ -90,24 +85,27 @@
 
         <div class="space-y-4 mb-12">
             <h2 class="text-center text-[10px] font-black text-gray-500 uppercase tracking-widest mb-6 italic">— Signature Collections —</h2>
-            <div onclick="openPack('Platinum Prestige', 'Spectacle de fumée carbonique, cocktails Arc-en-ciel et verrerie de luxe.', ['https://i.ibb.co/VWVv31V3/1767794354722.jpg', 'https://i.ibb.co/93nhSVqc/1767794466129.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer">
+            
+            <div onclick="openPack('Platinum Prestige', 'Spectacle de fumée, cocktails Arc-en-ciel et service VIP.', ['https://raw.githubusercontent.com/corneillenday483-pixel/Shake-and-smile-cocktails-/main/1767271665944%20(3)%20(2).png', 'https://i.ibb.co/93nhSVqc/1767794466129.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer">
                 <span class="text-lg font-black gold-text italic">Platinum Prestige</span>
                 <i class="fa-solid fa-crown text-gold"></i>
             </div>
-            <div onclick="openPack('Gold Experience', 'Créations artistiques, saveurs équilibrées et classiques revisités.', ['https://i.ibb.co/ynD102Vf/1767794560467.jpg', 'https://i.ibb.co/kVmw2r0j/0619fc3a6e6d3404cb4434cc1019b112.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer">
+
+            <div onclick="openPack('Gold Experience', 'Créations artistiques et classiques revisités.', ['https://i.ibb.co/ynD102Vf/1767794560467.jpg', 'https://i.ibb.co/kVmw2r0j/0619fc3a6e6d3404cb4434cc1019b112.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer">
                 <span class="text-lg font-black text-white italic">Gold Experience</span>
                 <i class="fa-solid fa-star opacity-40"></i>
             </div>
-            <div onclick="openPack('Fresh Smile', 'Mocktails aux fruits frais, infusions florales et fraîcheur intense.', ['https://i.ibb.co/84RJ9w2Z/55b62810858f8abfb593fdaf3fa4aedd.jpg', 'https://i.ibb.co/Kjk0W2zG/e08dbd05085f4b972d0981d800bdb1af-1.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer">
+
+            <div onclick="openPack('Fresh Smile', 'Mocktails aux fruits frais et infusions florales.', ['https://i.ibb.co/84RJ9w2Z/55b62810858f8abfb593fdaf3fa4aedd.jpg', 'https://i.ibb.co/Kjk0W2zG/e08dbd05085f4b972d0981d800bdb1af-1.jpg'])" class="glass-item p-6 flex justify-between items-center cursor-pointer">
                 <span class="text-lg font-black text-blue-300 italic">Fresh Smile</span>
                 <i class="fa-solid fa-leaf text-blue-300 opacity-50"></i>
             </div>
         </div>
 
         <div class="flex justify-center gap-10 mb-10 text-2xl text-gray-400">
-            <a href="https://www.instagram.com/shake.andsmile" target="_blank" class="hover:text-gold transition-all"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.tiktok.com/@shakeandsmilecocktail" target="_blank" class="hover:text-gold transition-all"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="https://wa.me/243978355121" target="_blank" class="text-green-500 hover:scale-110"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/shake.andsmile" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@shakeandsmilecocktail" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/243978355121" target="_blank" class="text-green-500"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
     </div>
 
@@ -115,44 +113,39 @@
         <div class="modal-content">
             <h2 class="gold-text text-2xl font-black italic mb-2 uppercase">Votre Devis</h2>
             <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-6">L'excellence sur mesure</p>
-            <div class="flex flex-col">
-                <input type="text" id="f-nom" class="premium-input" placeholder="Nom complet">
-                <input type="text" id="f-event" class="premium-input" placeholder="Type d'événement (Mariage, Soirée...)">
-                <input type="text" id="f-date" class="premium-input" placeholder="Date de l'événement">
-                <input type="text" id="f-lieu" class="premium-input" placeholder="Lieu">
-                <input type="number" id="f-invites" class="premium-input" placeholder="Nombre d'invités">
-                <select id="f-pack" class="premium-input">
-                    <option value="" disabled selected>Choisir une formule</option>
-                    <option value="Platinum Prestige">Platinum Prestige</option>
-                    <option value="Gold Experience">Gold Experience</option>
-                    <option value="Fresh Smile">Fresh Smile</option>
-                </select>
-            </div>
-            <button onclick="sendDevis()" class="w-full btn-gold py-5 mt-10 text-xs font-black shadow-lg">Envoyer la demande</button>
-            <button onclick="toggleModal('devisModal', false)" class="w-full mt-4 text-gray-500 text-[10px] uppercase font-bold">Fermer</button>
+            <input type="text" id="f-nom" class="premium-input w-full" placeholder="Nom complet">
+            <input type="text" id="f-event" class="premium-input w-full" placeholder="Type d'événement">
+            <input type="text" id="f-date" class="premium-input w-full" placeholder="Date">
+            <input type="text" id="f-lieu" class="premium-input w-full" placeholder="Lieu">
+            <input type="number" id="f-invites" class="premium-input w-full" placeholder="Nombre d'invités">
+            <select id="f-pack" class="premium-input w-full">
+                <option value="" disabled selected>Choisir une formule</option>
+                <option value="Platinum Prestige">Platinum Prestige</option>
+                <option value="Gold Experience">Gold Experience</option>
+                <option value="Fresh Smile">Fresh Smile</option>
+            </select>
+            <button onclick="sendDevis()" class="w-full btn-gold py-5 mt-10 text-xs font-black">Envoyer sur WhatsApp</button>
+            <button onclick="toggleModal('devisModal', false)" class="w-full mt-4 text-gray-500 text-[10px] uppercase font-bold">Retour</button>
         </div>
     </div>
 
     <div id="payModal" class="modal">
         <div class="modal-content text-center">
             <h2 class="gold-text text-xl font-black italic mb-4 uppercase">Paiement</h2>
-            <p class="text-[10px] text-gray-400 mb-8 leading-relaxed">COPIEZ LE NUMÉRO POUR EFFECTUER LE PAIEMENT</p>
-            
+            <p class="text-[10px] text-gray-400 mb-8 italic uppercase tracking-widest">Veuillez copier le numéro pour le paiement</p>
             <div class="space-y-6">
                 <div class="p-5 border border-white/10 rounded-3xl bg-white/5">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" class="w-8 h-8 mx-auto mb-3">
-                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Titulaire : CORNEILLE NDAY</p>
-                    <p class="text-xl font-black gold-text mt-1 tracking-widest">084 061 284 9</p>
+                    <p class="text-[10px] font-bold text-gray-400">Titulaire : CORNEILLE NDAY</p>
+                    <p class="text-xl font-black gold-text mt-1">084 061 284 9</p>
                 </div>
-                
                 <div class="p-5 border border-white/10 rounded-3xl bg-white/5">
                     <div class="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center mx-auto mb-3 font-black text-xs">A</div>
-                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Titulaire : CORNEILLE NDAY</p>
-                    <p class="text-xl font-black gold-text mt-1 tracking-widest">097 835 512 1</p>
+                    <p class="text-[10px] font-bold text-gray-400">Titulaire : CORNEILLE NDAY</p>
+                    <p class="text-xl font-black gold-text mt-1">097 835 512 1</p>
                 </div>
             </div>
-            
-            <button onclick="toggleModal('payModal', false)" class="w-full btn-gold py-4 mt-8 text-[10px] font-black">Confirmer</button>
+            <button onclick="toggleModal('payModal', false)" class="w-full btn-gold py-4 mt-8 text-[10px] font-black">Fermer</button>
         </div>
     </div>
 
@@ -169,7 +162,7 @@
         <div class="modal-content">
             <h2 class="gold-text text-xl font-black italic mb-6 uppercase">Vos Avis</h2>
             <div id="reviews-list" class="space-y-4 mb-8 max-h-40 overflow-y-auto pr-2">
-                <div class="border-l border-gold/40 pl-4 py-1"><p class="text-xs italic text-gray-300">"Expérience unique !"</p><p class="text-[8px] text-gold mt-1 uppercase font-black">— Client</p></div>
+                <div class="border-l border-gold/40 pl-4 py-1"><p class="text-xs italic text-gray-300">"Expérience incroyable !"</p><p class="text-[8px] text-gold mt-1 uppercase font-black">— Client Prestige</p></div>
             </div>
             <div class="border-t border-white/10 pt-4">
                 <input type="text" id="r-name" class="premium-input w-full" placeholder="Nom">
@@ -184,8 +177,8 @@
         <div class="modal-content text-center">
             <h2 class="gold-text text-xl font-black italic mb-8 uppercase">Galerie Vidéo</h2>
             <div class="space-y-4">
-                <a href="https://www.tiktok.com/@shakeandsmilecocktail" class="block w-full py-5 glass-item text-[10px] font-black uppercase tracking-widest hover:border-gold">Voir sur TikTok</a>
-                <a href="https://www.instagram.com/shake.andsmile" class="block w-full py-5 glass-item text-[10px] font-black uppercase tracking-widest hover:border-gold">Voir sur Instagram</a>
+                <a href="https://www.tiktok.com/@shakeandsmilecocktail" class="block w-full py-5 glass-item text-[10px] font-black uppercase tracking-widest">TikTok</a>
+                <a href="https://www.instagram.com/shake.andsmile" class="block w-full py-5 glass-item text-[10px] font-black uppercase tracking-widest">Instagram</a>
             </div>
             <button onclick="toggleModal('discoveryModal', false)" class="mt-8 text-gray-500 text-[10px] uppercase font-bold">Retour</button>
         </div>
@@ -194,16 +187,8 @@
     <script>
         function toggleModal(id, show) { 
             const m = document.getElementById(id);
-            if(show) { 
-                m.style.display = 'flex'; 
-                m.classList.add('active');
-                document.body.classList.add('modal-open'); 
-            }
-            else { 
-                m.style.display = 'none'; 
-                m.classList.remove('active');
-                document.body.classList.remove('modal-open'); 
-            }
+            if(show) { m.style.display = 'flex'; m.classList.add('active'); document.body.classList.add('modal-open'); }
+            else { m.style.display = 'none'; m.classList.remove('active'); document.body.classList.remove('modal-open'); }
         }
         
         function openPack(title, desc, imgs) {
@@ -233,8 +218,8 @@
             const l = document.getElementById('f-lieu').value;
             const i = document.getElementById('f-invites').value;
             const p = document.getElementById('f-pack').value;
-            if(!n || !e || !d) { alert("Veuillez remplir les informations obligatoires."); return; }
-            const msg = `*DEVIS PRIVÉ SHAKE %26 SMILE*%0A--------------------------%0A👤 Client: ${n}%0A🍸 Event: ${e}%0A📅 Date: ${d}%0A📍 Lieu: ${l}%0A👥 Convives: ${i}%0A✨ Pack: ${p}`;
+            if(!n || !e) return;
+            const msg = `*DEVIS PRIVÉ SHAKE %26 SMILE*%0A👤 Client: ${n}%0A🍸 Event: ${e}%0A📅 Date: ${d}%0A📍 Lieu: ${l}%0A👥 Convives: ${i}%0A✨ Pack: ${p}`;
             window.open(`https://wa.me/243978355121?text=${msg}`, '_blank');
         }
 
