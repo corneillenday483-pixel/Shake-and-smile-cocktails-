@@ -33,7 +33,6 @@
             100% { transform: translate(-5%, -10%) rotate(3deg); }
         }
 
-        /* LOGO SANS FOND BLANC */
         .logo-clean {
             mix-blend-mode: screen; 
             filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
@@ -44,7 +43,6 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
         }
 
-        /* EFFET DE LUMIÈRE SUR CHAQUE MENU */
         .glow-item {
             position: relative;
             transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -61,7 +59,6 @@
             transform: translateY(-3px);
         }
 
-        /* MODALES UNIFIÉES */
         .modal { 
             display: none; position: fixed; inset: 0; 
             background: rgba(0,0,0,0.92); backdrop-filter: blur(40px);
@@ -92,11 +89,22 @@
 
     <div class="smoke-container"><div class="smoke-layer"></div></div>
 
-    <header class="text-center mb-12 animate__animated animate__fadeIn">
+    <header class="text-center mb-8 animate__animated animate__fadeIn">
         <img src="1767271665944 (3).png" class="w-40 h-40 logo-clean mx-auto mb-4 object-contain">
         <h1 class="text-4xl font-black gold-text italic tracking-tighter" style="font-family: 'Playfair Display';">Shake & Smile</h1>
         <p class="text-[9px] tracking-[0.4em] uppercase text-gray-400 mt-2 font-bold">L'excellence au bout du shaker</p>
     </header>
+
+    <div class="grid grid-cols-2 gap-3 mb-4">
+        <a href="https://www.instagram.com/shake.andsmile" target="_blank" class="glow-item py-3 flex items-center justify-center gap-2">
+            <i class="fa-brands fa-instagram text-pink-500"></i>
+            <span class="text-[10px] font-black uppercase tracking-widest">Instagram</span>
+        </a>
+        <a href="https://tiktok.com/@shakeandsmilecocktail" target="_blank" class="glow-item py-3 flex items-center justify-center gap-2">
+            <i class="fa-brands fa-tiktok text-white"></i>
+            <span class="text-[10px] font-black uppercase tracking-widest">TikTok</span>
+        </a>
+    </div>
 
     <div class="space-y-4 mb-12">
         <button onclick="toggleModal('devisModal', true)" class="w-full btn-gold py-5 text-sm uppercase tracking-widest glow-item">
@@ -111,17 +119,17 @@
     <div class="space-y-4 mb-16">
         <h2 class="text-center text-[10px] font-black text-gray-500 uppercase tracking-widest mb-6">Nos Formules Prestige</h2>
         
-        <div onclick="openPack('Platinum Prestige', 'Show magistral avec fumée aromatique. Cocktails Arc-en-ciel et créations maison avec une décoration riche et captivante.', 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&q=80&w=800')" class="glow-item p-6 flex justify-between items-center">
+        <div onclick="openPack('Platinum Prestige', 'L’expérience ultime : Show magistral avec fumée aromatique, Cocktails Arc-en-ciel et créations maison uniques.', 'https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&q=80&w=800')" class="glow-item p-6 flex justify-between items-center">
             <span class="text-lg font-black gold-text italic">🥇 Platinum Prestige</span>
             <i class="fa-solid fa-plus text-gold opacity-50"></i>
         </div>
 
-        <div onclick="openPack('Gold Experience', 'Élégance et couleurs : Cocktails classiques et dégradés Arc-en-ciel servis dans des verres raffinés pour une ambiance chic.', 'https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&q=80&w=800')" class="glow-item p-6 flex justify-between items-center">
+        <div onclick="openPack('Gold Experience', 'Élégance et couleurs : Cocktails classiques et dégradés Arc-en-ciel servis avec raffinement.', 'https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&q=80&w=800')" class="glow-item p-6 flex justify-between items-center">
             <span class="text-lg font-black text-white italic">🥈 Gold Experience</span>
             <i class="fa-solid fa-plus text-white opacity-30"></i>
         </div>
 
-        <div onclick="openPack('Fresh Smile', 'L’essentiel fraîcheur : Cocktails classiques et recettes sans alcool, préparés avec des fruits frais et beaucoup de vitalité.', 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=800')" class="glow-item p-6 flex justify-between items-center">
+        <div onclick="openPack('Fresh Smile', 'L’essentiel fraîcheur : Cocktails classiques et sans alcool aux fruits frais.', 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=800')" class="glow-item p-6 flex justify-between items-center">
             <span class="text-lg font-black text-blue-400 italic">🥉 Fresh Smile</span>
             <i class="fa-solid fa-plus text-blue-400 opacity-50"></i>
         </div>
@@ -141,9 +149,9 @@
         </div>
     </div>
 
-    <a href="https://wa.me/243978355121" class="glow-item p-5 flex items-center justify-center gap-3 mb-20 border-green-900/20">
+    <a href="https://wa.me/243978355121" class="glow-item p-5 flex items-center justify-center gap-3 mb-20">
         <i class="fa-brands fa-whatsapp text-green-500 text-xl"></i>
-        <span class="text-[10px] font-black uppercase tracking-widest">Besoin d'aide ? Contactez-moi</span>
+        <span class="text-[10px] font-black uppercase tracking-widest">Une question ? Contactez-moi</span>
     </a>
 
     <footer class="mb-10 text-center opacity-30 text-[8px] font-black uppercase tracking-[0.5em]">
@@ -172,14 +180,6 @@
         </div>
     </div>
 
-    <div id="writeReviewModal" class="modal" style="z-index: 10000;">
-        <div class="modal-content">
-            <h2 class="gold-text text-xl font-black italic mb-4 uppercase">Votre Avis</h2>
-            <textarea id="rev-text" placeholder="Racontez votre expérience Shake & Smile..." class="h-32 text-xs"></textarea>
-            <button onclick="sendReview()" class="w-full btn-gold py-4 mt-4 uppercase text-[10px] font-black">Publier et Envoyer</button>
-        </div>
-    </div>
-
     <div id="packModal" class="modal">
         <div class="modal-content animate__animated animate__zoomIn">
             <img id="p-img" src="" class="w-full h-44 object-cover rounded-3xl mb-6 shadow-2xl">
@@ -197,7 +197,7 @@
                 <p id="pay-num" class="text-2xl font-black text-white font-mono"></p>
                 <p class="text-[10px] text-gold mt-4 font-black">CORNEILLE NDAY</p>
             </div>
-            <a id="pay-link" href="#" target="_blank" class="w-full btn-gold py-4 block uppercase text-[10px] font-black mb-4">Lancer l'application</a>
+            <a id="pay-link" href="#" target="_blank" class="w-full btn-gold py-4 block uppercase text-[10px] font-black mb-4">Payer via App</a>
             <button onclick="toggleModal('payModal', false)" class="text-gray-400 text-[10px] font-bold uppercase">Retour</button>
         </div>
     </div>
@@ -206,11 +206,11 @@
         <div class="modal-content">
             <h2 class="gold-text text-xl font-black italic mb-6 uppercase">Nouveau Devis</h2>
             <div class="space-y-2">
-                <input type="text" id="f-nom" placeholder="Votre Nom Complet">
+                <input type="text" id="f-nom" placeholder="Nom Complet">
                 <input type="text" id="f-event" placeholder="Nature de l'événement">
                 <input type="text" id="f-date" placeholder="Date et Heure">
-                <input type="text" id="f-addr" placeholder="Lieu / Adresse">
-                <input type="number" id="f-qty" placeholder="Nombre d'invités">
+                <input type="text" id="f-addr" placeholder="Lieu">
+                <input type="number" id="f-qty" placeholder="Invités">
                 <select id="f-pack">
                     <option value="Platinum Prestige">Platinum Prestige</option>
                     <option value="Gold Experience">Gold Experience</option>
@@ -218,6 +218,14 @@
                 </select>
                 <button onclick="sendDevis()" class="w-full btn-gold py-5 mt-4 uppercase text-[11px] font-black">Commander via WhatsApp</button>
             </div>
+        </div>
+    </div>
+
+    <div id="writeReviewModal" class="modal" style="z-index: 10000;">
+        <div class="modal-content">
+            <h2 class="gold-text text-xl font-black italic mb-4 uppercase">Votre Avis</h2>
+            <textarea id="rev-text" placeholder="Racontez votre expérience..." class="h-32 text-xs"></textarea>
+            <button onclick="sendReview()" class="w-full btn-gold py-4 mt-4 uppercase text-[10px] font-black">Publier</button>
         </div>
     </div>
 
@@ -241,12 +249,8 @@
         function sendDevis() {
             const nom = document.getElementById('f-nom').value;
             const ev = document.getElementById('f-event').value;
-            const dt = document.getElementById('f-date').value;
-            const ad = document.getElementById('f-addr').value;
-            const qt = document.getElementById('f-qty').value;
-            const pk = document.getElementById('f-pack').value;
-            if(!nom || !ev) { alert("Merci de remplir au moins votre nom et l'événement."); return; }
-            const text = `*DEVIS SHAKE %26 SMILE*%0A%0A*Client :* ${nom}%0A*Event :* ${ev}%0A*Date :* ${dt}%0A*Lieu :* ${ad}%0A*Invités :* ${qt}%0A*Pack :* ${pk}`;
+            if(!nom || !ev) { alert("Nom et événement requis."); return; }
+            const text = `*DEVIS SHAKE %26 SMILE*%0A%0A*Client :* ${nom}%0A*Event :* ${ev}%0A*Pack :* ${document.getElementById('f-pack').value}`;
             window.open(`https://wa.me/243978355121?text=${text}`, '_blank');
         }
 
@@ -255,7 +259,7 @@
             const savedReviews = JSON.parse(localStorage.getItem('ss_reviews')) || [];
             savedReviews.forEach(rev => {
                 const div = document.createElement('div');
-                div.className = "p-4 bg-white/5 rounded-2xl border border-white/5 italic text-[11px] animate__animated animate__fadeIn";
+                div.className = "p-4 bg-white/5 rounded-2xl border border-white/5 italic text-[11px] mb-2";
                 div.innerText = rev;
                 container.prepend(div);
             });
@@ -267,15 +271,9 @@
             let savedReviews = JSON.parse(localStorage.getItem('ss_reviews')) || [];
             savedReviews.push(rev);
             localStorage.setItem('ss_reviews', JSON.stringify(savedReviews));
-            const container = document.getElementById('reviews-container');
-            const div = document.createElement('div');
-            div.className = "p-4 bg-white/5 rounded-2xl border border-gold/20 italic text-[11px] animate__animated animate__bounceIn";
-            div.innerText = rev;
-            container.prepend(div);
             const text = `*NOUVEL AVIS CLIENT SHAKE %26 SMILE*%0A%0A"${rev}"`;
             window.open(`https://wa.me/243978355121?text=${text}`, '_blank');
-            document.getElementById('rev-text').value = "";
-            toggleModal('writeReviewModal', false);
+            location.reload();
         }
 
         window.onclick = function(e) { if(e.target.className === 'modal') e.target.style.display = 'none'; }
