@@ -10,14 +10,11 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Inter:wght@300;400;600;900&display=swap');
         
-        :root { 
-            --gold: #D4AF37; 
-            --gold-light: #FBF5B7;
-        }
+        :root { --gold: #D4AF37; }
 
         body { 
-            /* Arrière-plan avec image de cocktail fumé de haute qualité */
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
+            /* Background sombre avec fumée ambiante */
+            background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.9) 100%), 
                         url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=2000&auto=format&fit=crop'); 
             background-size: cover;
             background-position: center;
@@ -33,28 +30,28 @@
             -webkit-text-fill-color: transparent; 
         }
         
-        /* Effet de verre premium (Glassmorphism) */
+        /* Effet de flou sur TOUS les menus (Glow-item) */
         .glow-item { 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            border: 1px solid rgba(212, 175, 55, 0.3); 
-            background: rgba(255, 255, 255, 0.05); 
-            backdrop-filter: blur(12px); 
-            border-radius: 24px; 
+            transition: all 0.4s ease; 
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            background: rgba(0, 0, 0, 0.5); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px; 
         }
 
         .glow-item:hover { 
             border-color: var(--gold); 
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); 
-            transform: scale(1.02); 
-            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            background: rgba(20, 20, 20, 0.6);
         }
 
         .modal { 
             display: none; 
             position: fixed; 
             inset: 0; 
-            background: rgba(0,0,0,0.85); 
-            backdrop-filter: blur(10px); 
+            background: rgba(0,0,0,0.92); 
+            backdrop-filter: blur(20px); 
             z-index: 9999; 
             align-items: center; 
             justify-content: center; 
@@ -62,15 +59,15 @@
         }
 
         .modal-content { 
-            background: linear-gradient(145deg, #0f0f0f, #1a1a1a); 
+            background: rgba(10, 10, 10, 0.8); 
             border: 1px solid var(--gold); 
+            backdrop-filter: blur(25px);
             border-radius: 30px; 
             width: 100%; 
             max-width: 400px; 
             padding: 30px; 
             max-height: 90vh; 
             overflow-y: auto;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         .btn-gold { 
@@ -81,201 +78,157 @@
             transition: 0.3s;
         }
 
-        .btn-gold:active { transform: scale(0.95); }
-
         input, select { 
-            background: rgba(255,255,255,0.05) !important; 
+            background: rgba(255,255,255,0.03) !important; 
             border: 1px solid rgba(212, 175, 55, 0.2) !important; 
             color: white !important; 
             padding: 14px; 
             border-radius: 12px; 
             width: 100%; 
-            margin-top: 12px; 
-            font-size: 14px; 
-            outline: none;
+            margin-top: 10px; 
         }
 
-        input:focus { border-color: var(--gold) !important; }
-
-        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .gallery-img { width: 100%; height: 110px; object-fit: cover; border-radius: 12px; border: 1px solid rgba(212,175,55,0.3); }
-
-        /* Animation personnalisée */
-        .fade-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .gallery-img { width: 100%; height: 110px; object-fit: cover; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2); }
     </style>
 </head>
 <body class="max-w-md mx-auto px-6 py-10">
 
-    <header class="text-center mb-10 animate__animated animate__fadeInDown">
-        <div class="relative inline-block">
-            <img src="1767271665944 (3).png" class="w-32 h-32 mx-auto mb-4 object-contain filter drop-shadow(0 0 15px rgba(212,175,55,0.6))">
-        </div>
-        <h1 class="text-5xl font-black gold-text italic tracking-tighter" style="font-family: 'Playfair Display';">Shake & Smile</h1>
-        <p class="text-[10px] tracking-[0.4em] uppercase text-gray-300 mt-3 font-bold italic">L'Art de la Mixologie de Prestige</p>
+    <header class="text-center mb-12 animate__animated animate__fadeIn">
+        <img src="1767271665944 (3).png" class="w-28 h-28 mx-auto mb-6 object-contain filter drop-shadow(0 0 15px rgba(212,175,55,0.4))">
+        <h1 class="text-4xl font-black gold-text italic tracking-tighter" style="font-family: 'Playfair Display';">Shake & Smile</h1>
+        <p class="text-[9px] tracking-[0.5em] uppercase text-gray-400 mt-2 font-bold">Premium Mixology Service</p>
     </header>
 
-    <div class="space-y-4 mb-10 animate__animated animate__fadeInUp animate__delay-1s">
-        <button onclick="toggleModal('devisModal', true)" class="w-full btn-gold py-5 text-sm uppercase tracking-widest shadow-2xl flex items-center justify-center">
-            <i class="fa-solid fa-file-signature mr-3"></i> Demander un Devis Premium
+    <div class="space-y-4 mb-10">
+        <button onclick="toggleModal('devisModal', true)" class="w-full btn-gold py-5 text-sm uppercase tracking-widest glow-item border-none shadow-xl">
+            Obtenir mon Devis
         </button>
+
         <div class="grid grid-cols-2 gap-4">
-            <div onclick="toggleModal('discoveryModal', true)" class="glow-item py-5 text-center text-[11px] font-black uppercase tracking-widest cursor-pointer">
-                <i class="fa-solid fa-camera-retro mb-1 block text-gold text-lg"></i> Galerie
+            <div onclick="toggleModal('discoveryModal', true)" class="glow-item py-6 text-center text-[10px] font-black uppercase tracking-widest cursor-pointer">
+                <i class="fa-solid fa- images mb-2 block text-gold"></i> Galerie
             </div>
-            <div onclick="toggleModal('reviewsModal', true)" class="glow-item py-5 text-center text-[11px] font-black uppercase tracking-widest cursor-pointer">
-                <i class="fa-solid fa-comment-dots mb-1 block text-gold text-lg"></i> Avis
+            <div onclick="toggleModal('reviewsModal', true)" class="glow-item py-6 text-center text-[10px] font-black uppercase tracking-widest cursor-pointer">
+                <i class="fa-solid fa-star mb-2 block text-gold"></i> Avis Clients
             </div>
         </div>
     </div>
 
-    <div class="space-y-4 mb-12 animate__animated animate__fadeInUp animate__delay-1s">
-        <h2 class="text-center text-[10px] font-black text-gray-400 uppercase tracking-widest mb-6 italic">Nos Expériences Signature</h2>
+    <div class="space-y-4 mb-12">
+        <h2 class="text-center text-[10px] font-black text-gray-500 uppercase tracking-widest mb-6 italic">Nos Expériences Signature</h2>
         
-        <div onclick="openPack('Platinum Prestige', 'Le summum du luxe : Show cloche de fumée, cocktails moléculaires, effets Arc-en-ciel et service ganté.', ['https://i.ibb.co/VWVv31V3/1767794354722.jpg', 'https://i.ibb.co/93nhSVqc/1767794466129.jpg'])" class="glow-item p-6 flex justify-between items-center cursor-pointer">
+        <div onclick="openPack('Platinum Prestige', 'Show cloche de fumée, cocktails Arc-en-ciel et service de luxe.', ['https://i.ibb.co/VWVv31V3/1767794354722.jpg', 'https://i.ibb.co/93nhSVqc/1767794466129.jpg'])" class="glow-item p-6 flex justify-between items-center cursor-pointer">
             <span class="text-lg font-black gold-text italic">Platinum Prestige</span>
             <i class="fa-solid fa-crown text-gold"></i>
         </div>
 
-        <div onclick="openPack('Gold Experience', 'Élégance et saveurs : Cocktails classiques revisités et créations visuelles haut de gamme.', ['https://i.ibb.co/ynD102Vf/1767794560467.jpg', 'https://i.ibb.co/kVmw2r0j/0619fc3a6e6d3404cb4434cc1019b112.jpg'])" class="glow-item p-6 flex justify-between items-center cursor-pointer">
+        <div onclick="openPack('Gold Experience', 'Élégance et saveurs : Cocktails classiques et créations visuelles.', ['https://i.ibb.co/ynD102Vf/1767794560467.jpg', 'https://i.ibb.co/kVmw2r0j/0619fc3a6e6d3404cb4434cc1019b112.jpg'])" class="glow-item p-6 flex justify-between items-center cursor-pointer">
             <span class="text-lg font-black text-white italic">Gold Experience</span>
-            <i class="fa-solid fa-star text-gold opacity-80"></i>
-        </div>
-
-        <div onclick="openPack('Fresh Smile', 'Fraîcheur absolue : Mocktails innovants et cocktails aux fruits de saison.', ['https://i.ibb.co/84RJ9w2Z/55b62810858f8abfb593fdaf3fa4aedd.jpg', 'https://i.ibb.co/Kjk0W2zG/e08dbd05085f4b972d0981d800bdb1af-1.jpg'])" class="glow-item p-6 flex justify-between items-center cursor-pointer">
-            <span class="text-lg font-black text-blue-300 italic">Fresh Smile</span>
-            <i class="fa-solid fa-leaf text-blue-400 opacity-60"></i>
+            <i class="fa-solid fa-gem text-white/40"></i>
         </div>
     </div>
 
     <div class="glow-item p-8 text-center mb-10">
-        <h2 class="text-[9px] font-black text-gray-400 uppercase mb-6 tracking-widest italic">Règlement Sécurisé</h2>
+        <h2 class="text-[9px] font-black text-gray-500 uppercase mb-6 tracking-widest italic text-center">Règlement Rapide</h2>
         <div class="flex justify-around items-center">
-            <div onclick="openPay('Orange Money', '084 061 284 9')" class="cursor-pointer hover:scale-110 transition">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" class="w-10 h-10 mx-auto mb-2 rounded-lg shadow-lg">
+            <div onclick="openPay('Orange Money', '0840612849')" class="cursor-pointer">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" class="w-10 h-10 mx-auto mb-2 rounded-lg">
                 <p class="text-[9px] font-bold text-orange-500">ORANGE</p>
             </div>
-            <div onclick="openPay('Airtel Money', '097 835 512 1')" class="cursor-pointer hover:scale-110 transition">
-                <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-2 font-black text-xs italic shadow-lg border border-white/20">A</div>
+            <div onclick="openPay('Airtel Money', '0978355121')" class="cursor-pointer">
+                <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-2 font-black text-xs italic">A</div>
                 <p class="text-[9px] font-bold text-red-500">AIRTEL</p>
             </div>
         </div>
     </div>
 
-    <a href="https://wa.me/243978355121" class="glow-item p-5 flex items-center justify-center gap-3 mb-20 group">
-        <i class="fa-brands fa-whatsapp text-green-500 text-2xl group-hover:animate-bounce"></i>
-        <span class="text-[11px] font-black uppercase tracking-widest">Conciergerie WhatsApp</span>
+    <a href="https://wa.me/243978355121" class="glow-item p-5 flex items-center justify-center gap-3 mb-20 hover:bg-white/10 transition-all">
+        <i class="fa-brands fa-whatsapp text-green-500 text-2xl"></i>
+        <span class="text-[11px] font-black uppercase tracking-widest">Contacter Shake-and-Smile</span>
     </a>
 
     <div id="devisModal" class="modal">
-        <div class="modal-content animate__animated animate__zoomIn">
-            <h2 class="gold-text text-2xl font-black italic mb-2">VOTRE DEVIS</h2>
-            <p class="text-[10px] text-gray-400 mb-6 uppercase tracking-widest">Réponse rapide garantie</p>
+        <div class="modal-content animate__animated animate__fadeInUp">
+            <h2 class="gold-text text-xl font-black italic mb-6 uppercase">Demande de Devis</h2>
             <div class="space-y-1">
-                <input type="text" id="f-nom" placeholder="Votre Nom complet">
-                <input type="text" id="f-event" placeholder="Type d'événement (Mariage, Privé...)">
-                <input type="text" id="f-date" placeholder="Date de l'événement">
-                <input type="text" id="f-lieu" placeholder="Ville et Quartier">
-                <input type="number" id="f-invites" placeholder="Nombre d'invités prévu">
+                <input type="text" id="f-nom" placeholder="Nom complet">
+                <input type="text" id="f-event" placeholder="Événement (Mariage, Soirée...)">
+                <input type="text" id="f-date" placeholder="Date prévue">
+                <input type="text" id="f-lieu" placeholder="Lieu / Ville">
+                <input type="number" id="f-invites" placeholder="Nombre d'invités">
                 <select id="f-pack">
-                    <option value="Platinum Prestige">Formule Platinum Prestige</option>
-                    <option value="Gold Experience">Formule Gold Experience</option>
-                    <option value="Fresh Smile">Formule Fresh Smile</option>
+                    <option value="Platinum Prestige">Formule Platinum</option>
+                    <option value="Gold Experience">Formule Gold</option>
+                    <option value="Fresh Smile">Formule Fresh</option>
                 </select>
-                <button onclick="sendDevisFull()" class="w-full btn-gold py-4 mt-6 uppercase text-[11px] font-black shadow-lg">
-                    Générer mon Devis WhatsApp
-                </button>
+                <button onclick="sendDevisFull()" class="w-full btn-gold py-4 mt-6 uppercase text-[11px] font-black">Envoyer la demande</button>
             </div>
-            <button onclick="toggleModal('devisModal', false)" class="w-full mt-6 text-gray-500 text-[10px] uppercase font-bold hover:text-white transition">Annuler</button>
+            <button onclick="toggleModal('devisModal', false)" class="w-full mt-4 text-gray-500 text-[10px] uppercase font-bold">Fermer</button>
+        </div>
+    </div>
+
+    <div id="payModal" class="modal">
+        <div class="modal-content text-center animate__animated animate__zoomIn">
+            <h2 id="pay-title" class="gold-text text-xl font-black mb-4 uppercase italic"></h2>
+            <div class="bg-black/40 p-6 rounded-2xl border border-gold/20 mb-6 backdrop-blur-lg">
+                <p class="text-[10px] text-gray-500 uppercase mb-2 font-bold">Numéro de transfert</p>
+                <p id="pay-num" class="text-2xl font-black text-white font-mono tracking-widest"></p>
+                <p class="text-[11px] text-gold mt-3 font-black">NOM : SHAKE & SMILE</p>
+            </div>
+            <button id="pay-call-btn" class="w-full btn-gold py-5 mb-4 uppercase text-[11px] font-black flex items-center justify-center gap-2">
+                <i class="fa-solid fa-phone"></i> Effectuer le payement
+            </button>
+            <button onclick="toggleModal('payModal', false)" class="w-full text-gray-500 text-[10px] uppercase font-bold">Retour</button>
         </div>
     </div>
 
     <div id="discoveryModal" class="modal">
-        <div class="modal-content text-center">
-            <h2 class="gold-text text-xl font-black mb-6 italic">NOTRE UNIVERS</h2>
-            <div class="gallery-grid">
+        <div class="modal-content">
+            <h2 class="gold-text text-xl font-black mb-6 italic text-center uppercase">Galerie Prestige</h2>
+            <div class="grid grid-cols-2 gap-3">
                 <img src="https://i.ibb.co/VWVv31V3/1767794354722.jpg" class="gallery-img">
                 <img src="https://i.ibb.co/93nhSVqc/1767794466129.jpg" class="gallery-img">
                 <img src="https://i.ibb.co/ynD102Vf/1767794560467.jpg" class="gallery-img">
                 <img src="https://i.ibb.co/kVmw2r0j/0619fc3a6e6d3404cb4434cc1019b112.jpg" class="gallery-img">
             </div>
-            <button onclick="toggleModal('discoveryModal', false)" class="w-full mt-6 btn-gold py-3 uppercase text-[10px] font-black">Retour</button>
+            <button onclick="toggleModal('discoveryModal', false)" class="w-full mt-6 btn-gold py-3 uppercase text-[10px] font-black">Fermer</button>
         </div>
     </div>
 
     <div id="reviewsModal" class="modal">
-        <div class="modal-content text-center">
-            <h2 class="gold-text text-xl font-black mb-6 italic">LIVRE D'OR</h2>
-            <div class="space-y-4 text-left">
-                <div class="p-4 bg-white/5 rounded-xl border border-gold/20">
-                    <div class="flex text-gold text-[8px] mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-[11px] italic text-gray-200">"Le show fumé était incroyable, mes invités ont adoré l'expérience !"</p>
-                    <p class="text-[9px] font-bold text-gold mt-2 uppercase">- Jean M.</p>
-                </div>
-                <div class="p-4 bg-white/5 rounded-xl border border-gold/20">
-                    <div class="flex text-gold text-[8px] mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-[11px] italic text-gray-200">"Cocktails aussi beaux que bons. Shake & Smile est la référence."</p>
-                    <p class="text-[9px] font-bold text-gold mt-2 uppercase">- Sarah K.</p>
-                </div>
-            </div>
-            <button onclick="toggleModal('reviewsModal', false)" class="w-full mt-6 btn-gold py-3 uppercase text-[10px] font-black">Retour au menu</button>
-        </div>
-    </div>
-
-    <div id="payModal" class="modal">
-        <div class="modal-content text-center">
-            <h2 id="pay-title" class="gold-text text-xl font-black mb-4 uppercase italic"></h2>
-            <div class="bg-white/5 p-6 rounded-2xl border border-gold/30 mb-4">
-                <p class="text-[10px] text-gray-500 uppercase mb-2 font-bold tracking-widest">Numéro de transfert</p>
-                <p id="pay-num" class="text-2xl font-black text-white font-mono tracking-tighter"></p>
-                <p class="text-[11px] text-gold mt-4 font-black">COMPTE : SHAKE & SMILE</p>
-            </div>
-            <button onclick="toggleModal('payModal', false)" class="w-full btn-gold py-4 uppercase text-[10px] font-black">C'est noté</button>
-        </div>
-    </div>
-
-    <div id="packModal" class="modal">
         <div class="modal-content">
-            <div id="p-gallery" class="gallery-grid mb-6"></div>
-            <h2 id="p-title" class="gold-text text-2xl font-black italic mb-2"></h2>
-            <p id="p-desc" class="text-sm text-gray-300 leading-relaxed mb-8 italic"></p>
-            <button onclick="toggleModal('packModal', false)" class="w-full btn-gold py-4 uppercase text-[10px] font-black">Fermer</button>
+            <h2 class="gold-text text-xl font-black mb-6 italic text-center uppercase">Livre d'Or</h2>
+            <div class="space-y-3">
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 backdrop-blur-md">
+                    <p class="text-[11px] italic">"Une expérience sensorielle unique, le fumé est magique."</p>
+                    <p class="text-[9px] font-bold text-gold mt-2">- Marc L.</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 backdrop-blur-md">
+                    <p class="text-[11px] italic">"Le service le plus prestigieux de la ville, sans hésiter."</p>
+                    <p class="text-[9px] font-bold text-gold mt-2">- Elena R.</p>
+                </div>
+            </div>
+            <button onclick="toggleModal('reviewsModal', false)" class="w-full mt-6 btn-gold py-3 uppercase text-[10px] font-black">Fermer</button>
         </div>
     </div>
 
     <script>
-        // Fonction universelle pour ouvrir/fermer les modals
-        function toggleModal(id, show) {
-            const modal = document.getElementById(id);
-            if(show) {
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden'; // Empêche le scroll derrière
-            } else {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
+        function toggleModal(id, show) { document.getElementById(id).style.display = show ? 'flex' : 'none'; }
         
         function openPack(title, desc, imgs) {
-            document.getElementById('p-title').innerText = title;
-            document.getElementById('p-desc').innerText = desc;
-            const gallery = document.getElementById('p-gallery');
-            gallery.innerHTML = ''; 
-            imgs.forEach(src => {
-                const img = document.createElement('img');
-                img.src = src;
-                img.className = "gallery-img h-32";
-                gallery.appendChild(img);
-            });
-            toggleModal('packModal', true);
+            alert("Détails du pack: " + title + "\n" + desc); // Version simplifiée pour mobile
         }
 
         function openPay(name, num) {
             document.getElementById('pay-title').innerText = name;
             document.getElementById('pay-num').innerText = num;
+            // Configurer le bouton d'appel
+            document.getElementById('pay-call-btn').onclick = function() {
+                window.location.href = "tel:" + num;
+            };
             toggleModal('payModal', true);
         }
 
-        // Correction de la fonction d'envoi WhatsApp
         function sendDevisFull() {
             const nom = document.getElementById('f-nom').value;
             const event = document.getElementById('f-event').value;
@@ -284,24 +237,13 @@
             const nbr = document.getElementById('f-invites').value;
             const pack = document.getElementById('f-pack').value;
 
-            if(!nom || !event || !date || !lieu) { 
-                alert("Veuillez remplir les informations essentielles (Nom, Événement, Date et Lieu)."); 
-                return; 
-            }
+            if(!nom || !event) { alert("Veuillez remplir les champs."); return; }
 
-            // Construction du message avec TOUTES les informations
-            const message = `*NOUVELLE DEMANDE DE DEVIS*%0A*SHAKE %26 SMILE PRESTIGE*%0A----------------------------%0A👤 *Client :* ${nom}%0A🍸 *Événement :* ${event}%0A📅 *Date :* ${date}%0A📍 *Lieu :* ${lieu}%0A👥 *Invités :* ${nbr} personnes%0A✨ *Formule choisie :* ${pack}%0A----------------------------%0A_Demande envoyée depuis le menu digital._`;
-            
+            const message = `*DEVIS SHAKE %26 SMILE*%0A👤 Nom: ${nom}%0A🍸 Event: ${event}%0A📅 Date: ${date}%0A📍 Lieu: ${lieu}%0A👥 Invités: ${nbr}%0A✨ Formule: ${pack}`;
             window.open(`https://wa.me/243978355121?text=${message}`, '_blank');
         }
 
-        // Fermeture au clic à l'extérieur
-        window.onclick = function(e) {
-            if(e.target.classList.contains('modal')) {
-                e.target.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
+        window.onclick = function(e) { if(e.target.className === 'modal') e.target.style.display = 'none'; }
     </script>
 </body>
 </html>
